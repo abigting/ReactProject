@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工会佳缘</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <!-- 引入样式和js文件 -->
+    <script src="./tpl/static/unicon/date/js/mobileSelect.min.js"></script>
+    <link href="./tpl/static/unicon/date/css/mobileSelect.css" rel="stylesheet" />
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+        .education_certificate .col-xs-3,.front_idcard .col-xs-3,.back_idcard .col-xs-3,.image1 .col-xs-3,image2 .col-xs-3,image2 .col-xs-3{
+            padding-left: 0;
+            padding-right: 0;
+            margin-right: 8%;
+        }
+        .images .col-xs-3,.certificate .col-xs-3,.idcard_front_back .col-xs-3{
+            padding: 0;
+            margin-right: 1rem;
+        }
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/unicon_01.png" class="borderStyle"></div>
+    </div>
+</div>
+<input type="hidden" name="id" id="id" value="{jlzcms:$id}"/>
+<!--表单部分-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-6 control-label " >请选择您的行业</div>
+            <div class="col-xs-5 row" id="industry" <eq name="member.is_verify" value="-1">disabled</eq>>
+                <input type="text" class="form-control moremes" name="industry" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                工作单位</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="company" class="form-control " name="company" placeholder="请输入您的工作单位" value="{jlzcms:$member['company']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                工作岗位</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="post" class="form-control " name="post" placeholder="请输入您的岗位" value="{jlzcms:$member['post']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-7 control-label " >
+                <span class="redstar">*</span>
+                请选择您的单位性质</div>
+            <div class="col-xs-4 row" id="company_property" <eq name="member.is_verify" value="-1">disabled</eq>>
+                <input type="text" class="form-control moremes" name="company_property" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <!--<div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                单位性质</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="company_property" class="form-control " name="company_property" placeholder="请输入您的工作单位">
+            </div>
+        </div>-->
+
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-7 control-label " >
+                <span class="redstar">*</span>
+                所属系统或者区域</div>
+            <div class="col-xs-4 row" id="system_area" <eq name="member.is_verify" value="-1">disabled</eq>>
+                <input type="text" class="form-control moremes" name="system_area" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <!--<div class="form-group col-xs-12 row">
+            <label class="col-xs-6 control-label">
+                <span class="redstar">*</span>
+                所属系统或者区域</label>
+            <div class="col-xs-6 row">
+                <input type="text" id="system_area" class="form-control " name="system_area" placeholder="请输入您的工作单位">
+            </div>
+        </div>-->
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">年收入(万元)</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="annual_income" class="form-control " name="annual_income" placeholder="请输入您的年收入" value="{jlzcms:$member['annual_income']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">学历证书</label>
+            <div class="col-xs-7 row">
+                <div class="row certificate">
+                    <div class="col-xs-3">
+                        <img src="{jlzcms:$member.education_certificate}" alt="" class="img-responsive education_certificate" onerror='this.src="http://pic3.jinlanzuan.com/qt/repair/addImg.png"' <eq name="member.is_verify" value="-1">disabled</eq>>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">身份证正反面</label>
+            <div class="col-xs-7 row">
+                <div class="row idcard_front_back">
+                    <div class="col-xs-3">
+                        <img src="{jlzcms:$member.front_idcard}" alt="" class="img-responsive front_idcard" onerror='this.src="http://pic3.jinlanzuan.com/qt/repair/addImg.png"' <eq name="member.is_verify" value="-1">disabled</eq>>
+                    </div>
+                    <div class="col-xs-3">
+                        <img src="{jlzcms:$member.back_idcard}" alt="" class="img-responsive back_idcard" onerror='this.src="http://pic3.jinlanzuan.com/qt/repair/addImg.png"' <eq name="member.is_verify" value="-1">disabled</eq>>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">个人照片</label>
+            <div class="col-xs-7 row">
+                <div class="row images">
+                    <div class="col-xs-3">
+                        <img src="{jlzcms:$member.image1}" alt="" class="img-responsive image1" onerror='this.src="http://pic3.jinlanzuan.com/qt/repair/addImg.png"' <eq name="member.is_verify" value="-1">disabled</eq>>
+                    </div>
+                    <div class="col-xs-3">
+                        <img src="{jlzcms:$member.image2}" alt="" class="img-responsive image2" onerror='this.src="http://pic3.jinlanzuan.com/qt/repair/addImg.png"' <eq name="member.is_verify" value="-1">disabled</eq>>
+                    </div>
+                    <div class="col-xs-3">
+                        <img src="{jlzcms:$member.image3}" alt="" class="img-responsive image3" onerror='this.src="http://pic3.jinlanzuan.com/qt/repair/addImg.png"' <eq name="member.is_verify" value="-1">disabled</eq>>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">自我介绍</label>
+            <div class="col-xs-8 row">
+                <textarea class="form-control" id="self_introduction" name="self_introduction" placeholder="请输入您的介绍" cols="27"
+                          rows="5" <eq name="member.is_verify" value="-1">readonly</eq>>{jlzcms:$member['self_introduction']}</textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">择偶标准</label>
+            <div class="col-xs-8 row">
+                <textarea class="form-control" id="mate_standard" name="mate_standard" placeholder="请输入您的标准" cols="27"
+                          rows="5" <eq name="member.is_verify" value="-1">readonly</eq>>{jlzcms:$member['mate_standard']}</textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-10" style="padding-right: 0">
+                <span class="redstar">*</span>
+                本人承诺：《报名表》中内容信息属实、无误，因虚假信息造成的后果，责任自负。
+            </div>
+            <div class="col-xs-2">
+                <div class="b-checkbox is-warning is-circular">
+                    <input id="checkbox6" id="promise" class="styled" type="checkbox" name="promise" value="yes" <eq name="member.is_verify" value="-1">checked disabled</eq>>
+                    <label for="checkbox6">
+
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="remarks">注：打“*”号为必填项</div>
+<div class="text-center">
+    <eq name="member.is_verify" value="-1">
+        <button class="btn" id="return">返回到我的佳缘会员</button>
+    <else/>
+        <button type="submit"  class="btn" id="submit">提交</button>
+    </eq>
+</div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<!--    图片上传-->
+<script>
+    // 弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+
+    $(function(){
+        var industry = {jlzcms:$industry};
+        var companyProperty = {jlzcms:$companyProperty};
+        var systemArea = {jlzcms:$systemArea};
+        var is_verify = {jlzcms:$member['is_verify']};
+
+        var education_certificate_images = {
+            localId: [], //本地图片ID，可以用来显示预览图
+            serverId: [],
+            imgStr: "", //用来存放预览图的代码字符串
+            imgNm:0,//图片数量
+            uid:0, //用于存储返回的ID；
+        };
+        var idcard_images = {
+            localId: [], //本地图片ID，可以用来显示预览图
+            serverId: [],
+            imgStr: "", //用来存放预览图的代码字符串
+            imgNm:0,//图片数量
+            uid:0, //用于存储返回的ID；
+        };
+        var images = {
+            localId: [], //本地图片ID，可以用来显示预览图
+            serverId: [],
+            imgStr: "", //用来存放预览图的代码字符串
+            imgNm:0,//图片数量
+            uid:0, //用于存储返回的ID；
+        };
+
+        var education_certificate_image = "{jlzcms:$member['education_certificate']}";
+        var front_idcard_image = "{jlzcms:$member['front_idcard']}";
+        var back_idcard_image = "{jlzcms:$member['back_idcard']}";
+        var image1_image = "{jlzcms:$member['image1']}";
+        var image2_image = "{jlzcms:$member['image2']}";
+        var image3_image = "{jlzcms:$member['image3']}";
+
+        if("{jlzcms:$member.industry}" != null && "{jlzcms:$member.industry}" != '') {
+            $('#industry').text("{jlzcms:$member.industry}");
+        }
+        if("{jlzcms:$member.company_property}" != null && "{jlzcms:$member.company_property}" != '') {
+            $('#company_property').text("{jlzcms:$member.company_property}");
+        }
+        if("{jlzcms:$member.system_area}" != null && "{jlzcms:$member.system_area}" != '') {
+            $('#system_area').text("{jlzcms:$member.system_area}");
+        }
+
+        if(is_verify != -1) {
+            var industrySelect = new MobileSelect({
+                trigger: '#industry',
+                title: '选择行业',
+                wheels: [
+                    {data: industry}
+                ],
+                position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                transitionEnd:function(indexArr, data){
+//            console.log(data);
+                },
+                callback:function(indexArr, data){
+                    console.log(data);
+                }
+            });
+            var companyPropertySelect = new MobileSelect({
+                trigger: '#company_property',
+                title: '选择单位性质',
+                wheels: [
+                    {data: companyProperty}
+                ],
+                position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                transitionEnd:function(indexArr, data){
+                    //            console.log(data);
+                },
+                callback:function(indexArr, data){
+                    console.log(data);
+                }
+            });
+            var systemAreaSelect = new MobileSelect({
+                trigger: '#system_area',
+                title: '选择所属系统或区域',
+                wheels: [
+                    {data: systemArea}
+                ],
+                position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                transitionEnd:function(indexArr, data){
+                    //            console.log(data);
+                },
+                callback:function(indexArr, data){
+                    console.log(data);
+                }
+            });
+
+            // 学历证书
+            $(".education_certificate").click(function () {
+                wx.chooseImage({
+                    success: function (res) {
+                        if (res.localIds.length == 0 || res.localIds.length > 1) {
+                            toast('最多只能上传一张照片哦！');
+                            return;
+                        }
+                        $(".education_certificate").attr('src',res.localIds[0]);
+
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    console.log("res.serverId="+res.serverId);
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            console.log("data.url="+data.url);
+                                            if(data.status == 1){
+                                                education_certificate_image = data.url;
+//                                        if(education_certificate_images.serverId.length == 1) {
+//                                            education_certificate_images.serverId.pop();
+//                                        }
+//                                        education_certificate_images.serverId.push(data.url);
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(res.localIds[0]);
+                    }
+                });
+            });
+
+            // 身份证正反面
+            $(".idcard").click(function () {
+                if(idcard_images.imgNm == 2) {
+                    toast('最多只能上传两张照片哦！');
+                    return;
+                }
+
+                wx.chooseImage({
+                    success: function (res) {
+                        idcard_images.localId = res.localIds;
+                        if (idcard_images.localId.length == 0 || idcard_images.localId.length > 2) {
+                            toast('最多只能上传两张照片哦！');
+                            return;
+                        }
+                        // 在添加图片div内插入预览图代码
+                        idcard_images.imgStr="";
+                        for (var k = 0; k < idcard_images.localId.length; k++) {
+                            idcard_images.imgStr += '<div class="col-xs-3"><img src="' + idcard_images.localId[k] + '" class="img-responsive"></div>';
+                        }
+                        idcard_images.imgNm += idcard_images.localId.length;
+                        $(".idcard_front_back").prepend(idcard_images.imgStr);
+                        if(idcard_images.imgNm == 2) {
+                            $(".idcard:last-child").css("display","none");
+                        }
+                        var i = 0;
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    if(i < idcard_images.localId.length-1){
+                                        upload(idcard_images.localId[++i]);
+                                    }
+                                    console.log(res.serverId);
+//                            idcard_images.serverId.push(res.serverId);
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                idcard_images.serverId.push(data.url);
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(idcard_images.localId[0]);
+                    }
+                });
+            });
+
+            // 身份证正反面
+            $(".front_idcard").click(function () {
+                wx.chooseImage({
+                    success: function (res) {
+                        if (res.localIds.length == 0 || res.localIds.length > 1) {
+                            toast('最多只能上传一张照片哦！');
+                            return;
+                        }
+                        $(".front_idcard").attr('src',res.localIds[0]);
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                front_idcard_image = data.url;
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(res.localIds[0]);
+                    }
+                });
+            });
+
+            // 身份证正反面
+            $(".back_idcard").click(function () {
+                wx.chooseImage({
+                    success: function (res) {
+                        if (res.localIds.length == 0 || res.localIds.length > 1) {
+                            toast('最多只能上传一张照片哦！');
+                            return;
+                        }
+                        $(".back_idcard").attr('src',res.localIds[0]);
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                back_idcard_image = data.url;
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(res.localIds[0]);
+                    }
+                });
+            });
+
+            // 个人照片
+            $(".chooseImage").click(function () {
+                if(images.imgNm == 3) {
+                    toast('最多只能上传三张照片哦！');
+                    return;
+                }
+                wx.chooseImage({
+                    success: function (res) {
+                        images.localId = res.localIds;
+                        if (images.localId.length == 0 || images.localId.length > 3 || images.imgNm + images.localId.length > 3) {
+                            toast('最多只能上传三张照片哦！');
+                            return;
+                        }
+                        // 在添加图片div内插入预览图代码
+                        images.imgStr="";
+                        for (var k = 0; k < images.localId.length; k++) {
+                            images.imgStr += '<div class="col-xs-3"><img src="' + images.localId[k] + '" class="img-responsive"></div>';
+                        }
+                        images.imgNm+=images.localId.length;
+                        $(".images").prepend(images.imgStr);
+                        if(images.imgNm == 3) {
+                            $(".chooseImage:last-child").css("display","none");
+                        }
+                        var i = 0;
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    if(i<images.localId.length-1){
+                                        upload(images.localId[++i]);
+                                    }
+                                    console.log(res.serverId);
+//                            images.serverId.push(res.serverId);
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                images.serverId.push(data.url);
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload()
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(images.localId[0]);
+                    }
+                });
+            });
+
+            // 个人照片1
+            $(".image1").click(function () {
+                wx.chooseImage({
+                    success: function (res) {
+                        if (res.localIds.length == 0 || res.localIds.length > 1) {
+                            toast('最多只能上传一张照片哦！');
+                            return;
+                        }
+                        $(".image1").attr('src',res.localIds[0]);
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                image1_image = data.url;
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(res.localIds[0]);
+                    }
+                });
+            });
+
+            // 个人照片2
+            $(".image2").click(function () {
+                wx.chooseImage({
+                    success: function (res) {
+                        if (res.localIds.length == 0 || res.localIds.length > 1) {
+                            toast('最多只能上传一张照片哦！');
+                            return;
+                        }
+                        $(".image2").attr('src',res.localIds[0]);
+
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                image2_image = data.url;
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(res.localIds[0]);
+                    }
+                });
+            });
+
+            // 个人照片3
+            $(".image3").click(function () {
+                wx.chooseImage({
+                    success: function (res) {
+                        idcard_images.localId = res.localIds;
+                        if (res.localIds.length == 0 || res.localIds.length > 1) {
+                            toast('最多只能上传一张照片哦！');
+                            return;
+                        }
+                        $(".image3").attr('src',res.localIds[0]);
+
+                        function upload(param) {
+                            wx.uploadImage({
+                                localId: param,
+                                success: function (res) {
+                                    $.ajax({
+                                        dataType:"json",
+                                        url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                        type: "POST",
+                                        data: {
+                                            "imgUrl": res.serverId,
+                                        },
+                                        error: function () {
+                                            toast('Error loading XML document');
+                                        },
+                                        success: function (data, status) {
+                                            //var Obj = eval("(" + data + ")");
+                                            console.log(data.url);
+                                            if(data.status == 1){
+                                                image3_image = data.url;
+                                            }else{
+                                                toast('图片未上传成功，请重试');
+                                                window.location.reload();
+                                            }
+                                        }
+                                    });
+                                },
+                                fail: function (res) {
+                                    alert("fail"+JSON.stringify(res));
+                                }
+                            });
+                        }
+                        upload(res.localIds[0]);
+                    }
+                });
+            });
+        }
+
+        $('#return').click(function(){
+            window.location.href="{jlzcms::U('Union/myJiayuan',array('token'=>$_GET['token']))}";
+        });
+
+        $('#submit').click(function(){
+            var yes=document.getElementsByName("promise");
+            if(yes.item(0).checked){
+                var industry = $.trim($('#industry').text());
+                var company= $.trim($('#company').val());
+                var post= $.trim($('#post').val());
+                var company_property   = $.trim($('#company_property').text());
+                var system_area    = $.trim($('#system_area').text());
+                var annual_income   = $.trim($('#annual_income').val());
+                var self_introduction    = $.trim($('#self_introduction').val());
+                var mate_standard    = $.trim($('#mate_standard').val());
+                console.log(industry);
+                console.log(company);
+                console.log(post);
+                console.log(company_property);
+                console.log(system_area);
+                console.log(annual_income);
+                console.log(self_introduction);
+                console.log(mate_standard);
+
+                if(company === ''){
+                    toast('请填写您的工作单位');
+                    $('#company').focus();
+                    return;
+                }
+                if(post === ''){
+                    toast('请填写您的岗位');
+                    $('#post').focus();
+                    return;
+                }
+                if(company_property  === ''){
+                    toast('请选择您的单位性质');
+                    $('#company_property').focus();
+                    return;
+                }
+                if(system_area === '') {
+                    toast('请选择您的所属系统或区域');
+                    $('#system_area').focus();
+                    return;
+                }
+                var id = $('#id').val();
+                $("#submit").attr('disabled','true');
+                $.ajax({
+                    type: "POST",
+                    url: "{jlzcms::U('Union/addJiayuanMember2',array('token'=>$token,'wecha_id'=>$wecha_id))}",
+                    data: {
+                        'id':id,
+                        'industry':industry,
+                        'company':company,
+                        'post':post,
+                        'company_property':company_property,
+                        'system_area':system_area,
+                        'annual_income':annual_income,
+                        'education_certificate':education_certificate_image,
+                        'front_idcard':front_idcard_image,
+                        'back_idcard':back_idcard_image,
+                        'image1':image1_image,
+                        'image2':image2_image,
+                        'image3':image3_image,
+                        'self_introduction':self_introduction,
+                        'mate_standard':mate_standard
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        toast(data.msg);
+                        if(data.status == 1){
+                            setTimeout(function () {
+//                                window.location.href = "{jlzcms::U('Index/lists',array('token'=>$token,'classid'=>2240))}";
+//                                window.location.href = "{jlzcms::U('Union/myJiayuan',array('token'=>$_GET['token']))}";
+                                window.location.href = "{jlzcms::U('Union/myJiayuan',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+                            }, 2000);
+
+                        }
+                        else { $("#submit").removeAttr('disabled');}
+                    }
+                });
+
+
+            }
+            else{
+                toast('未勾选本人承诺！');
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

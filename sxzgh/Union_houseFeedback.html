@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小屋反馈</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 引入样式和js文件 -->
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+        .chooseImage{
+            width: 30%;
+            display: inline-block;
+        }
+        .menpai_pic,.shinei1_pic,.shinei2_pic{
+            width: 30%;
+            display: inline-block;
+        }
+    </style>
+
+
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/xiaowufankui.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--表单部分-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">宣教物料</label>
+            <div class="col-xs-8 row">
+                <textarea class="form-control" id="propaganda_material" name="propaganda_material" placeholder="请输入宣教物料" cols="27" rows="5">{jlzcms:$feedback['propaganda_material']}</textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">母乳喂养消耗品</label>
+            <div class="col-xs-8 row">
+                <textarea class="form-control" id="consumable" name="consumable" placeholder="请输入母乳喂养消耗品" cols="27" rows="5">{jlzcms:$feedback['consumable']}</textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">社会影响受益人群反馈</label>
+            <div class="col-xs-8 row">
+                <textarea class="form-control" id="feedback" name="feedback" placeholder="请输入您的反馈" cols="27" rows="5">{jlzcms:$feedback['feedback']}</textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">照片回传</label>
+            <div class="col-xs-8 row">
+               <!-- <if condition="$feedback['door_plate_pic']">
+                    <img src="{jlzcms:$feedback['door_plate_pic']}" alt="" class="img-responsive menpai_pic">
+                    <else/>
+                    <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/menpai.png" alt="" class="img-responsive menpai_pic">
+                </if>
+                <if condition="$feedback['indoor_pic1']">
+                    <img src="<if condition="$feedback['indoor_pic1']">{jlzcms:$feedback['indoor_pic1']}<else/>http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/shinei.png</if>" alt="" class="img-responsive shinei1_pic">
+                    <else/>
+                    <img src="" alt="" class="img-responsive shinei1_pic">
+                </if>
+                <if condition="$feedback['indoor_pic2']">
+                    <img src="{jlzcms:$feedback['indoor_pic2']}" alt="" class="img-responsive shinei2_pic">
+                    <else/>
+                    <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/shinei.png" alt="" class="img-responsive shinei2_pic">
+                </if>-->
+                <img src="<if condition="$feedback['door_plate_pic']">{jlzcms:$feedback['door_plate_pic']}<else/>http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/menpai.png</if>" alt="" class="img-responsive menpai_pic">
+                <img src="<if condition="$feedback['indoor_pic1']">{jlzcms:$feedback['indoor_pic1']}<else/>http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/shinei.png</if>" alt="" class="img-responsive shinei1_pic">
+                <img src="<if condition="$feedback['indoor_pic2']">{jlzcms:$feedback['indoor_pic2']}<else/>http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/shinei.png</if>" alt="" class="img-responsive shinei2_pic">
+            </div>
+        </div>
+    </form>
+</div>
+<!--<div id="remarks">注：打“*”号为必填项</div>-->
+<div class="text-center">
+    <button type="submit" class="btn " id="submit">提交</button>
+</div>
+<div style="text-align:center;margin-top: 1rem;margin-bottom: 7rem">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<!--    图片上传-->
+<script>
+    var menpai_images = {
+        localId: [], //本地图片ID，可以用来显示预览图
+        serverId: [],
+        imgStr: "", //用来存放预览图的代码字符串
+        imgNm:0,//图片数量
+        uid:0, //用于存储返回的ID；
+    };
+    var shinei1_images = {
+        localId: [], //本地图片ID，可以用来显示预览图
+        serverId: [],
+        imgStr: "", //用来存放预览图的代码字符串
+        imgNm:0,//图片数量
+        uid:0, //用于存储返回的ID；
+    };
+    var shinei2_images = {
+        localId: [], //本地图片ID，可以用来显示预览图
+        serverId: [],
+        imgStr: "", //用来存放预览图的代码字符串
+        imgNm:0,//图片数量
+        uid:0, //用于存储返回的ID；
+    };
+    var menpai_image = "{jlzcms:$feedback['door_plate_pic']}";
+    var shinei1_image = "{jlzcms:$feedback['indoor_pic1']}";
+    var shinei2_image = "{jlzcms:$feedback['indoor_pic2']}";
+    // 门牌照
+    $(".menpai_pic").click(function () {
+        wx.chooseImage({
+            success: function (res) {
+                if (res.localIds.length == 0 || res.localIds.length>1) {
+                    alert('只能上传一张照片哦');
+                    return;
+                }
+                $(".menpai_pic").attr('src',res.localIds[0]);
+
+                function upload(param) {
+                    wx.uploadImage({
+                        localId: param,
+                        success: function (res) {
+                            console.log(res.serverId);
+                            $.ajax({
+                                dataType:"json",
+                                url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                type: "POST",
+                                data: {
+                                    "imgUrl": res.serverId,
+                                },
+                                error: function () {
+                                    alert('Error loading XML document');
+                                },
+                                success: function (data, status) {
+                                    //var Obj = eval("(" + data + ")");
+                                    alert(data.url);
+                                    if(data.status == 1){
+//                                        if(menpai_images.serverId.length == 1) {
+//                                            menpai_images.serverId.pop();
+//                                        }
+//                                        menpai_images.serverId.push(data.url);
+                                        menpai_image = data.url;
+                                    }else{
+                                        alert('图片未上传成功，请重试');
+                                        window.location.reload()
+                                    }
+                                }
+                            });
+                        },
+                        fail: function (res) {
+                            alert("fail"+JSON.stringify(res));
+                        }
+                    });
+                }
+                upload(res.localIds[0]);
+            }
+        });
+    });
+    // 室内照1
+    $(".shinei1_pic").click(function () {
+        wx.chooseImage({
+            success: function (res) {
+                if (res.localIds.length == 0 || res.localIds.length>1) {
+                    alert('只能上传一张照片哦');
+                    return;
+                }
+                $(".shinei1_pic").attr('src',res.localIds[0]);
+
+                function upload(param) {
+                    wx.uploadImage({
+                        localId: param,
+                        success: function (res) {
+                            console.log(res.serverId);
+                            $.ajax({
+                                dataType:"json",
+                                url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                type: "POST",
+                                data: {
+                                    "imgUrl": res.serverId,
+                                },
+                                error: function () {
+                                    alert('Error loading XML document');
+                                },
+                                success: function (data, status) {
+                                    //var Obj = eval("(" + data + ")");
+                                    console.log(data.url);
+                                    if(data.status == 1){
+//                                        if(shinei1_images.serverId.length == 1) {
+//                                            shinei1_images.serverId.pop();
+//                                        }
+//                                        shinei1_images.serverId.push(data.url);
+                                        shinei1_image = data.url;
+                                    }else{
+                                        alert('图片未上传成功，请重试');
+                                        window.location.reload()
+                                    }
+                                }
+                            });
+                        },
+                        fail: function (res) {
+                            alert("fail"+JSON.stringify(res));
+                        }
+                    });
+                }
+                upload(res.localIds[0]);
+            }
+        });
+    });
+    // 室内照2
+    $(".shinei2_pic").click(function () {
+        wx.chooseImage({
+            success: function (res) {
+                if (res.localIds.length == 0 || res.localIds.length>1) {
+                    alert('只能上传一张照片哦');
+                    return;
+                }
+                $(".shinei2_pic").attr('src',res.localIds[0]);
+
+                function upload(param) {
+                    wx.uploadImage({
+                        localId: param,
+                        success: function (res) {
+                            console.log(res.serverId);
+                            $.ajax({
+                                dataType:"json",
+                                url: "{jlzcms::U('Union/addImg',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}",
+                                type: "POST",
+                                data: {
+                                    "imgUrl": res.serverId,
+                                },
+                                error: function () {
+                                    alert('Error loading XML document');
+                                },
+                                success: function (data, status) {
+                                    //var Obj = eval("(" + data + ")");
+                                    console.log(data.url);
+                                    if(data.status == 1){
+//                                        if(shinei2_images.serverId.length == 1) {
+//                                            shinei2_images.serverId.pop();
+//                                        }
+//                                        shinei2_images.serverId.push(data.url);
+                                        shinei2_image = data.url;
+                                    }else{
+                                        alert('图片未上传成功，请重试');
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        },
+                        fail: function (res) {
+                            alert("fail"+JSON.stringify(res));
+                        }
+                    });
+                }
+                upload(res.localIds[0]);
+            }
+        });
+    });
+
+    //        弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+    $(function(){
+        $('#submit').click(function(){
+            var propaganda_material = $.trim($('#propaganda_material').val());
+            var consumable   = $.trim($('#consumable').val());
+            var feedback   = $.trim($('#feedback').val());
+            var door_plate_pic = menpai_image;
+            var indoor_pic1 = shinei1_image;
+            var indoor_pic2 = shinei2_image;
+//            if(menpai_images.serverId.length > 0 && menpai_images.serverId[0] != "undefined") {
+//                door_plate_pic = menpai_images.serverId[0];
+//            }
+//            if(shinei1_images.serverId.length > 0 && shinei1_images.serverId[0] != "undefined") {
+//                indoor_pic1 = shinei1_images.serverId[0];
+//            }
+//            if(shinei2_images.serverId.length > 0 && shinei2_images.serverId[0] != "undefined") {
+//                indoor_pic2 = shinei2_images.serverId[0];
+//            }
+
+            console.log(propaganda_material);
+            console.log(consumable);
+            console.log(feedback);
+            console.log(door_plate_pic);
+            console.log(indoor_pic1);
+            console.log(indoor_pic2);
+
+            if(propaganda_material === ''){
+                toast('请填写您的宣教物料！');
+                $('#propaganda_material').focus();
+                return;
+            }
+            if(consumable  === ''){
+                toast('请输入母乳喂养消耗品！');
+                $('#consumable').focus();
+                return;
+            }
+            if(feedback === '') {
+                toast('请输入社会影响受益人群反馈！');
+                $('#feedback').focus();
+                return;
+            }
+            if(door_plate_pic == null || door_plate_pic === ''){
+                toast('请上传门牌照！');
+                return;
+            }
+            if(indoor_pic1 == null || indoor_pic1 === ''){
+                toast('请上传室内照！');
+                return;
+            }
+            if(indoor_pic2 == null || indoor_pic2 === '') {
+                toast('请上传室内照！');
+                return;
+            }
+            $("#submit").attr('disabled','true');
+            $.ajax({
+                type: "POST",
+                url: "{jlzcms::U('Union/houseFeedback',array('token'=>$token,'wecha_id'=>$wecha_id))}",
+                data: {
+                    'id':{jlzcms:$id},
+                    'wid':{jlzcms:$wid},
+                    'propaganda_material':propaganda_material,
+                    'consumable':consumable,
+                    'feedback':feedback,
+                    'door_plate_pic':door_plate_pic,
+                    'indoor_pic1':indoor_pic1,
+                    'indoor_pic2':indoor_pic2,
+                },
+                dataType: "json",
+                success: function(data) {
+                    toast(data.msg);
+                    if(data.status == 1){
+                        window.location.href ="{jlzcms::U('Union/myWarmHouse',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+                    }
+                    else { $("#submit").removeAttr('disabled');}
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

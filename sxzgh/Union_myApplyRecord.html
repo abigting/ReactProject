@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的培训申请</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入样式和js文件 -->
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+            word-break:break-all;
+        }
+        /*内容*/
+        .applyAnsgreen{
+            color: #12c216;
+            border:2px solid #12c216;
+            border-radius: 5px;
+            padding: 2px;
+            font-size: 11px;
+        }
+        .applyAnsred{
+            color: #fc6238;
+            border:2px solid #fc6238;
+            border-radius: 5px;
+            padding: 2px;
+            font-size: 11px;
+        }
+        .applyAnsora{
+            color: #fdb324;
+            border:2px solid #fdb324;
+            border-radius: 5px;
+            padding: 2px;
+            font-size: 11px;
+        }
+        .myApply{
+            display: none;
+        }
+        .myCourse .queTime{
+            color: #cccccc;
+            margin-left: 1rem;
+        }
+        .slide{
+            float: right;
+            margin-right: 15px;
+            margin-top: -2rem;
+        }
+        .myCourse{
+            background-color: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 0.5rem;
+        }
+        .myCourse .col-xs-1:nth-child(1) img{
+            width: 2rem;
+        }
+        .myCourse .col-xs-10:nth-child(2){
+            font-size: 11px;
+            margin-top: 0.7rem;
+            margin-bottom: 0.7rem;
+        }
+        .myCourse .col-xs-10:nth-child(3){
+            margin-top: 1.7rem;
+            font-size: 11px;
+            color: #cccccc;
+        }
+        .myApply{
+            background-color: #fff;
+            padding-bottom: 10px;
+        }
+        .myApply .col-xs-1:nth-child(1) img{
+            width: 2rem;
+        }
+        .myApply .myApplyMes:nth-child(1){
+            border-top: 2px solid #eee;
+            padding: 1rem 0px 0px 0px;
+            margin-top: 0;
+            margin-left: 4%;
+            width: 92%;
+        }
+        .myApply .myApplyMes{
+            font-size: 14px;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .iconHide{
+            display: none;
+        }
+    </style>
+
+
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/wodezixun.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--咨询内容部分-->
+<div class="container-fluid">
+    <if condition="$list">
+        <volist name="list" id="vo">
+            <div class="unionAdvice">
+                <div class="row myCourse">
+                    <div class="col-xs-10">
+                        申请课程：{jlzcms:$vo.course}
+                    </div>
+                    <div class="col-xs-10">
+                        <if condition="$vo.is_verify eq 0">
+                            <span class="applyAnsora">审批中</span>
+                        <elseif condition="$vo.is_verify eq 1"/>
+                            <span class="applyAnsgreen">申请成功</span>
+                        <elseif condition="$vo.is_verify eq -1"/>
+                            <span class="applyAnsred">申请失败</span>
+                        </if>
+                        <span class="queTime">{jlzcms:$vo.create_time|date="Y-m-d H:i:s",###}</span>
+                    </div>
+                        <div class="col-xs-1 slide">
+                            <i class="icon iconfont slideDown">&#xe610;</i>
+                            <i class="icon iconfont slideUp iconHide">&#xe659;</i>
+                        </div>
+                </div>
+                    <div class="row myApply">
+                        <div class="col-xs-12 myApplyMes">
+                            单位名称：{jlzcms:$vo.name}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            单位地址：{jlzcms:$vo.company_address}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            职工总数：{jlzcms:$vo.worker_num}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            培训人数：{jlzcms:$vo.participator_num}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            培训时间：{jlzcms:$vo.training_time}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            培训场地：{jlzcms:$vo.site_area} 平方米
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            联系人姓名：{jlzcms:$vo.contact_name}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            联系人电话 ：{jlzcms:$vo.contact_tel}
+                        </div>
+                        <div class="col-xs-12 myApplyMes">
+                            联系人手机：{jlzcms:$vo.contact_phone}
+                        </div>
+                    </div>
+            </div>
+        </volist>
+    <else/>
+        <div style="color: #ccc;text-align: center;margin-top: 40%;margin-bottom: 7rem">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/noMessage1.png" alt="" style="width: 42%">
+        </div>
+    </if>
+</div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<!--底部导航-->
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+    <nav>
+        <ul id="top_menu" class="top_menu">
+            <li>
+                <a href="{jlzcms::U('Index/index',array('token'=>$_GET['token'],'classid'=>1))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/8/b/4/6/59f2dc678276c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Index/lists',array('token'=>$_GET['token'],'classid'=>2235))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/1/1/7/b/59f2dd3a176a4.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Union/perCenter',array('token'=>$_GET['token']))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/a/2/5/e/59f2dd65c8178.png"  />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $(".slide").click(function(){
+            $(this).parent().siblings('.myApply').slideToggle();
+        });
+        $('.slide').click(function(ev){
+            $(this).children('.slideDown').toggleClass('iconHide');
+            $(this).children('.slideUp').toggleClass('iconHide');
+        });
+    });
+</script>
+<!-- Commonshare -->
+<include file="Common:share" />
+</body>
+</html>

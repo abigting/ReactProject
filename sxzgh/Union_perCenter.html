@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>个人中心</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        html {
+            overflow-x:hidden;
+            /*overflow-y:hidden;  */
+        }
+        body{
+            max-width:640px;
+            margin:0 auto;
+            width:100%;
+            background-color:#ecebeb;
+            font-family: 黑体;
+            height:100vh;
+            overflow-x: hidden;
+            color:#4c4c4c;
+        }
+        .top{
+            background:url("http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/topbanner.png") no-repeat;
+            /*margin-top: 7%;*/
+            padding-top: 8%;
+            padding-left: 5%;
+            padding-bottom: 9%;
+            text-align: center;
+        }
+        .pic{
+            width: 97px;
+            height: 97px;
+            border-radius: 50%;
+        }
+        .top a{
+            color:#47d71f!important;
+        }
+        .tel{
+            background-color: white;
+            height: 44px;
+            line-height: 44px;
+            padding-left: 6%;
+            font-size: 16px;
+            margin-top: 0.3%;
+        }
+        .center a{
+            color:#000;
+        }
+        ul, li { list-style:none; margin:0;}
+        .top_bar { position: fixed; z-index: 900; bottom: 0; left: 0; right: 0; margin: auto; font-family: Helvetica, Tahoma, Arial, Microsoft YaHei, sans-serif; overflow: hidden}
+        .top_menu { display:-webkit-box; border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc;width: 100%; background: #f9f9f9; height: 65px; display: -webkit-box; display: box; margin:0; padding:0; -webkit-box-orient:
+                horizontal;}
+        .top_bar .top_menu>li { -webkit-box-flex:1;padding:7px 0;text-align:center; }
+        .top_menu>li:first-child { background:none; }
+        .top_bar .top_menu>li>a img {height: 50px; width: 50px;}
+        .top_bar li:first-child a { display: block; }
+        .top_menu li:last-of-type a { background: none; }
+        .second img{
+            width:8%;
+            margin-left:3px;
+            margin-right: 2vw;
+        }
+        .changeing{
+            position: fixed;
+            z-index: 222;
+            bottom: 9rem;
+            right: 1.5rem;
+        }
+        .changeing img{
+            width:6rem;
+            opacity: 0.5;
+        }
+        .onePart{
+            margin-bottom: 1rem;
+        }
+        a:link {text-decoration: none;}/* 未被访问的链接 */
+
+        a:visited {text-decoration: none;}/* 已被访问的链接 */
+
+        a:hover {text-decoration: none;}/* 鼠标指针移动到链接上 */
+
+        a:active {text-decoration: none;}/* 正在被点击的链接 */
+    </style>
+</head>
+<body class="center">
+<div class="top">
+    <div><img src="{jlzcms:$info['portrait']}"  class="pic" ></div>
+    <!--<p style="color:#4da1fb;"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/00.png" alt="" style="margin-right: 8px; width:16px;height:16px">重新认证</p>-->
+    <p style="margin-top: 1.5rem">
+        <eq name="info.sex" value="1">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/02.png" alt="" style="width:18px;height:18px;">
+            <else/>
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/01.png" alt="" style="width:18px;height:18px;">
+        </eq>
+        <b>昵称 {jlzcms:$info['wechaname']}</b>
+    </p>
+
+</div>
+<div style="margin-bottom:12%;margin-top:2%;">
+    <a href="{jlzcms::U('Union/receive_member_card',array('token'=>$_GET['token']))}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/icon04.png">
+            会员卡
+        </div>
+    </a>
+    <neq name="token" value="jgynrz1508916129">
+        <a href="">
+            <div class="tel second">
+                <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/grzx_02.png">
+                商家认证
+            </div>
+        </a>
+    </neq>
+    <a href="{jlzcms:$f_siteUrl}/index.php?g=Wap&m=Card&a=my_coupon&token={jlzcms:$token}&cardid={jlzcms:$cardid}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/grzx_03.png">
+            我的福利
+        </div>
+    </a>
+       <div class="onePart">
+    <a href="{jlzcms:$f_siteUrl}/index.php?g=Wap&m=CultureK&a=index&token={jlzcms:$token}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/icon02.png" >
+            积分商城
+        </div>
+    </a>
+    <a href="{jlzcms::U('CultureK/exchange',array('token'=>$_GET['token']))}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/grzx_05.png">
+            我的兑换
+        </div>
+    </a>
+    <neq name="token" value="jgynrz1508916129">
+        <a href="">
+            <div class="tel second">
+                <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/grzx_06.png">
+                我的帖子
+            </div>
+        </a>
+    </neq>
+    <a href="{jlzcms:$f_siteUrl}/index.php?g=Wap&m=CultureK&a=address&token={jlzcms:$token}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/grzx_08.png">
+            地址管理
+        </div>
+    </a>
+   <a  href="{jlzcms::U('Union/myIntegral',array('token'=>$_GET['token']))}">
+       <div class="tel second">
+           <img src="//wx91go.oss-cn-hangzhou.aliyuncs.com/zhegongyuan/center/mon.png" alt="">
+           我的积分
+           <div  style="color:#fbc300;float: right;padding-right: 1.5rem">
+               <if condition="$info['integral']">
+                   {jlzcms:$info['integral']}
+                   <else/>
+                   0
+               </if>
+
+           </div>
+       </div>
+   </a>
+       </div>
+    <div class="onePart">
+    <a href="{jlzcms::U('CultureK/coffee_shop',array('token'=>$_GET['token']))}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/icon01.png" >
+            合作商家
+        </div>
+    </a>
+    </div>
+    <div class="onePart">
+    <eq name="token" value="jgynrz1508916129">
+        <a href="{jlzcms::U('Union/myConsultation',array('token'=>$_GET['token']))}">
+            <div class="tel second">
+                <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/icon05.png">
+                我的咨询
+            </div>
+        </a>
+        <else/>
+        <a href="">
+            <div class="tel second">
+                <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/grzx_07.png">
+                我的法律咨询
+            </div>
+        </a>
+    </eq>
+    <a href="{jlzcms::U('Union/myApplyRecord',array('token'=>$_GET['token']))}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/icon06.png" >
+            我的培训申请
+        </div>
+    </a>
+    <a href="{jlzcms::U('Union/myJiayuan',array('token'=>$_GET['token']))}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/jiayuan.png" >
+            我的工会佳缘
+        </div>
+    </a>
+    <a href="{jlzcms::U('Union/myWarmHouse',array('token'=>$_GET['token']))}">
+        <div class="tel second">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/icon03.png" >
+            我的暖心小屋
+        </div>
+    </a>
+    </div>
+</div>
+<a class="changeing" href="{jlzcms::U('Index/lists',array(token=>$token,classid=>2359,'role'=>'merchant'))}" >
+    <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/shangjia.png" alt="">
+</a>
+<div style="text-align:center;margin-top: 1rem;margin-bottom: 7rem">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<div style="margin-bottom:4%">
+
+</div>
+
+<!--<include file="$cateMenuFileName"/>-->
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<!--底部导航-->
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+    <nav>
+        <ul id="top_menu" class="top_menu">
+            <li>
+                <a href="{jlzcms::U('Index/index',array('token'=>$_GET['token'],'classid'=>1))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/8/b/4/6/59f2dc678276c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Index/lists',array('token'=>$_GET['token'],'classid'=>2235))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/1/1/7/b/59f2dd3a176a4.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Union/perCenter',array('token'=>$_GET['token']))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/5/a/4/d/59f2dd7c53b34.png"  />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+//    $(function(){
+//        $.ajax({
+//            type: "POST",
+//            url: "{jlzcms::U('Hqzgy/getMyOneCard',array('token'=>$token,'wecha_id'=>$wecha_id,'time'=>$time))}",
+//            data: {1:1},
+//            dataType: "json",
+//            success: function(data) {
+//                if(data.status == 1){
+//                    $("#myonecard").append("￥"+data.data);
+//                }else{
+//                    check.toast(data.msg);
+//                }
+//            }
+//        });
+//
+//    })
+</script>
+<!-- <include file="Index:styleInclude"/><include file="$cateMenuFileName"/> -->
+
+</body>
+</html>

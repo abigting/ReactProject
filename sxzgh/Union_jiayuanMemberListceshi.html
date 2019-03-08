@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><eq name="sex" value="1">男生列表<else/>女生列表</eq></title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 引入样式和js文件 -->
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./tpl/static/unicon/date/js/mobileSelect.min.js"></script>
+    <link href="./tpl/static/unicon/date/css/mobileSelect.css" rel="stylesheet" />
+
+    <link href="./tpl/Enterprise/common/Qt/style/js/dropload.css" rel="stylesheet">
+
+    <style>
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+        @font-face {
+            font-family: 'iconfont';  /* project id 472307 */
+            src: url('//at.alicdn.com/t/font_472307_c5lhbzo6hitchaor.eot');
+            src: url('//at.alicdn.com/t/font_472307_c5lhbzo6hitchaor.eot?#iefix') format('embedded-opentype'),
+            url('//at.alicdn.com/t/font_472307_c5lhbzo6hitchaor.woff') format('woff'),
+            url('//at.alicdn.com/t/font_472307_c5lhbzo6hitchaor.ttf') format('truetype'),
+            url('//at.alicdn.com/t/font_472307_c5lhbzo6hitchaor.svg#iconfont') format('svg');
+        }
+        .iconfont {
+            font-family:"iconfont" !important;
+            font-size:24px;
+            font-style:normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: -1rem;
+        }
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        .swiper-slide img{
+            display:block;
+            width:100%;
+        }
+        .boyNum{
+            font-size: 18px;
+            font-weight: 400;
+            color: #b9dffd;
+            margin-top: 0.5rem;
+        }
+        .girlNum{
+            font-size: 18px;
+            font-weight: 400;
+            color: #ff9494;
+            margin-top: 0.5rem;
+        }
+        .chooseboy{
+            padding-top: 2px;
+        }
+        .boymess{
+            border-top: 2px solid #eee;
+            font-size:1.4rem ;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            display: none;
+        }
+        .boymess .row:nth-child(2){
+            padding-top: 1.5rem;
+        }
+        .chooseTop{
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .iconHide{
+            display: none;
+        }
+        /*表单样式部分*/
+        input.form-control {
+            border:0 ;
+            padding:6px 12px 6px 0;
+        }
+        .form-horizontal .form-group {
+            margin-right: -50px;
+            margin-left: 0px;
+            padding: 15px;
+            margin-bottom: 0;
+            border-bottom: 1px solid #eee;
+        }
+        .form-group .form-control{
+            outline-style: none;
+            box-shadow: none;
+        }
+        label{
+            font-weight: 400;
+            font-size: 1.6rem;
+            margin-top: 4px;
+        }
+        .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+            background-color: #fff;
+            height: 26px;
+        }
+        .boyicon{
+            width: 18px;
+        }
+        .control-label{
+            margin-top: 7px;
+        }
+        .row{
+            background-color:#fff;
+        }
+        .boyBox{
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        #age,#industry{
+            margin-top: 4px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .phoBox{
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .imgBox{
+            width:32%;
+            padding: 3px;
+        }
+        .bigImgBox{
+            position: fixed;
+            width: 26rem;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            border:5px solid #fff;
+            box-shadow:3px 3px 4px #000;background:#fff;filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135,Color='#000000');
+        }
+        .bigIMG{
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <eq name="sex" value="1">
+                <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/boy.png" class="borderStyle">
+                <else/>
+                <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/girl.png" class="borderStyle">
+            </eq>
+        </div>
+    </div>
+</div>
+<div class="row boyBox">
+    <div class="col-xs-3 control-label" >年龄范围</div>
+    <div class="col-xs-2 " id="age" >
+        <input type="text" class="form-control" name="age" value="{jlzcms:$age}" unselectable="on" onfocus="this.blur()" readonly>
+    </div>
+    <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+    <div class="col-xs-2 control-label" >行业</div>
+    <div class="col-xs-3 " id="industry">
+        <input type="text" class="form-control" name="industry" value="{jlzcms:$indus}" unselectable="on" onfocus="this.blur()" readonly>
+    </div>
+    <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+</div>
+<div class="container-fluid">
+
+    <if condition="$list">
+        <volist name="list" id="vo">
+            <div class="chooseboy">
+                <div class="row chooseTop">
+                    <div class=" col-xs-3 boyNum" >
+                        {jlzcms:$vo.member_no}
+                    </div>
+                    <div class=" col-xs-8 ">
+                        {jlzcms:$vo.household_registration}
+                        /{jlzcms:$vo.age}岁
+
+                        /{jlzcms:$vo.height}
+
+                        /{jlzcms:$vo.weight}
+                        <br>
+                        {jlzcms:$vo.education}
+                        /{jlzcms:$vo.industry}
+                    </div>
+                    <div class=" col-xs-1 slide">
+                        <i class="icon iconfont slideDown">&#xe610;</i>
+                        <i class="icon iconfont slideUp iconHide">
+                            &#xe659;</i>
+                    </div>
+                </div>
+
+                <div class="boymess row">
+                    <div class="row" >
+                        <div class="col-xs-1" ><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/fivestar.png" alt="" class="boyicon"></div>
+                        <div class="col-xs-11">
+                            年收入：<if condition="$vo.annual_income and $vo.annual_income neq ''">{jlzcms:$vo.annual_income}<else/>保密</if><br/>
+                            <p style="margin-top: 1.5rem">自我介绍：<if condition="$vo.self_introduction and $vo.self_introduction neq ''">{jlzcms:$vo.self_introduction}<else/>暂无</if></p>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-xs-1"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/mostlove.png" alt="" class="boyicon"></div>
+                        <div class="col-xs-11">
+                            择偶标准：<if condition="$vo.mate_standard and $vo.mate_standard neq ''">{jlzcms:$vo.mate_standard}<else/>暂无</if><br/>
+                        </div>
+                    </div>
+                    <div class="row phoBox">
+                        <img src="{jlzcms:$vo.image1}" alt="" class="imgBox" >
+                        <img src="{jlzcms:$vo.image2}" alt="" class="imgBox">
+                        <img src="{jlzcms:$vo.image3}" alt="" class="imgBox">
+                    </div>
+                </div>
+            </div>
+        </volist>
+        <else/>
+        <div style="color: #ccc;text-align: center;margin-top: 5%">暂无符合条件的佳缘会员</div>
+    </if>
+    <div style="text-align:center;margin-top: 1rem">
+        <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+    </div>
+</div>
+<!--底部导航-->
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+    <nav>
+        <ul id="top_menu" class="top_menu">
+            <li>
+                <a href="{jlzcms::U('Index/index',array('token'=>$_GET['token'],'classid'=>1))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/8/b/4/6/59f2dc678276c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Index/lists',array('token'=>$_GET['token'],'classid'=>2235))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/1/1/7/b/59f2dd3a176a4.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Union/perCenter',array('token'=>$_GET['token']))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/a/2/5/e/59f2dd65c8178.png"  />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+    $(document).ready(function(){
+        var age = ['全部','16-20','21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','61-65','66-70','71-75','76-80','81-85','86-90'];
+        var industry = {jlzcms:$industry};
+        var sex = {jlzcms:$sex};
+        industry.splice(0, 0, "全部");0
+        var ageSelect = new MobileSelect({
+            trigger: '#age',
+            title: '选择年龄区间',
+            wheels: [
+                {data: age}
+            ],
+            position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+                console.log(data);
+            },
+            callback:function(indexArr, data){
+                console.log(data);
+                window.location.href = "{jlzcms::U('Union/jiayuanMemberList',array('token'=>$token,'wecha_id'=>$wecha_id,'age'=>'"+data+"','industry'=>$indus,'sex'=>$sex))}";
+            }
+        });
+        var industrySelect= new MobileSelect({
+            trigger: '#industry',
+            title: '选择行业',
+            wheels: [
+                {data:industry}
+            ],
+            position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+                console.log(data);
+            },
+            callback:function(indexArr, data){
+                window.location.href = "{jlzcms::U('Union/jiayuanMemberList',array('token'=>$token,'wecha_id'=>$wecha_id,'age'=>$age,'industry'=>'"+data+"','sex'=>$sex))}";
+            }
+        });
+
+
+        $(".slide").click(function(){
+            $(this).parent().siblings('.boymess').slideToggle();
+        });
+        $('.slide').click(function(ev){
+            $(this).children('.slideDown').toggleClass('iconHide');
+            $(this).children('.slideUp').toggleClass('iconHide');
+        })
+    });
+</script>
+<!--下拉加载-->
+<script src="./tpl/Enterprise/common/Qt/style/js/dropload.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        allData();
+        function allData(){
+            var counter = 0;
+            var num = 2;
+            var searchName = $("#input").val();
+            console.log(searchName);
+            var pageStart = 0, pageEnd = 0;
+            $('.now').dropload({
+                scrollArea: window,
+                loadDownFn: function (me) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{jlzcms::U('Union/getJiayuanMemberList',array('token'=>$token))}",
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == 1) {
+                                var data = data.data;
+                                counter++;
+                                pageEnd = num * counter;
+                                pageStart = pageEnd - num;
+
+                                for (var i = pageStart; i < pageEnd; i++) {
+                                    var a = 'all' + i;
+                                    var statusName;
+                                    var status = data[i].status;
+                                    var times =new Date(parseInt(data[i].create_time) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ').substr(5);
+                                    if(status ==0){
+                                        statusName = '待解答';
+                                    }else{
+                                        statusName = '已解答';
+                                    }
+                                    var html = '<div class="chooseboy">'+
+                                        '<div class="row chooseTop">'+
+                                        '<div class=" col-xs-3 boyNum" >'+data[i].member_no+'</div>'+
+                                        '<div class=" col-xs-8 ">'+data[i].household_registration+'/'+data[i].age+'岁/'+data[i].height+'/'+data[i].weight+'<br>'+
+                                        '+data[i].education+'+
+                                        '/'+data[i].industry+''+
+                                        '</div>'+
+                                        '<div class=" col-xs-1 slide">'+
+                                        '</div>'+
+                                        '</div>'+
+                                        '<div class="boymess row">'+
+                                        '</div>'+
+                                        '</div>';
+
+                                    $('.container-fluid').append(html);
+                                    if(status ==1){
+                                        var unionState= '<span class="ansred">'+statusName+'</span>';
+                                        var slide= '<i class="icon iconfont slideDown">&#xe610;</i>' +
+                                            '<i class="icon iconfont slideUp iconHide">&#xe659;</i>';
+                                        var boymess=
+                                            '<div class="row" >'+
+                                            '<div class="col-xs-1" ><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/fivestar.png" alt="" class="boyicon"></div>'+
+                                            '<div class="col-xs-11">'+
+                                            '年收入：'+data[i].annual_income+'<br/>' +
+                                            '<p style="margin-top: 1.5rem">自我介绍：{jlzcms:$vo.self_introduction}</p>'+
+                                            '</div>'+
+                                            '</div>'+
+                                            '<div class="row" >'+
+                                            '<div class="col-xs-1"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/mostlove.png" alt="" class="boyicon"></div>'+
+                                            '<div class="col-xs-11">'+
+                                            '择偶标准：'+data[i].mate_standard+'<br/>'+
+                                            '</div>'+
+                                            '</div>'+
+                                            '<div class="row phoBox">'+
+                                            '<img src='+data[i].image1+' alt="" class="imgBox" >'+
+                                            '<img src='+data[i].image2+' alt="" class="imgBox">'+
+                                            '<img src='+data[i].image3+' alt="" class="imgBox">'+
+                                            '</div>';
+                                        $('#' + a).find('.slide').append(slide);
+                                        $('#' + a).find('.boymess').append(boymess);
+                                    }
+                                    else{
+                                        var unionState= '<span class="ansgreen">'+statusName+'</span>';
+                                        $('#' + a).find('.unionState').append(unionState);
+                                    }
+                                    if ((i + 1) >= data.length) {
+                                        // 锁定
+                                        me.lock();
+                                        // 无数据
+                                        me.noData();
+                                        break;
+                                    }
+                                }
+                                $('.slide').unbind('click',useToggle);
+                                toggleStyle();
+                                me.resetload();
+                            }else{
+                                $('.now').empty();
+                                $('.container-fluid').html('<div style="color: #ccc;text-align: center;margin-top: 40%">\n' +
+                                    '          <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/noMessage2.png" alt="" style="width: 42%">\n' +
+                                    '      </div>');
+                            }
+                        },
+                        error: function (xhr, type) {
+                            // alert('Ajax error!');
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    })
+                }
+            })
+        }
+    });
+    function  toggleStyle(){
+        $(".slide").bind('click',useToggle);
+    }
+
+    function useToggle(){
+        $(this).parent().siblings('.answer').slideToggle();
+        $(this).children('.slideDown').toggleClass('iconHide');
+        $(this).children('.slideUp').toggleClass('iconHide');
+    }
+</script>
+<!--点击图片放大-->
+<script>
+    $(document).ready(function () {
+        $(".imgBox").click(function(){
+            if($(".bigImgBox").length <= 0 )
+            {
+                var imgSrc = $(this).attr("src");
+                console.log(imgSrc);
+                var   html = '<div class="bigImgBox">';
+                html += "<img src="+imgSrc+" alt='' class='bigIMG' >";
+                html += '</div>';
+                $(".container-fluid").append(html);
+            }
+            $(".bigImgBox").click(function(){
+                $(this).remove();
+                $(".imgBox").removeAttr('disabled');
+            })
+        })
+    })
+</script>
+<!-- Commonshare -->
+<include file="Common:share" />
+
+</body>
+</html>

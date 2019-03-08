@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工会佳缘</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <!-- 引入样式和js文件 -->
+    <script src="./tpl/static/unicon/date/js/mobileSelect.min.js"></script>
+    <link href="./tpl/static/unicon/date/css/mobileSelect.css" rel="stylesheet" />
+
+    <style>
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+    </style>
+
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/unicon_01.png" class="borderStyle"></div>
+    </div>
+</div>
+<!--表单部分-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">会员编号</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="member_no" class="form-control " name="member_no" placeholder="请输入您的会员编号" value="{jlzcms:$member['member_no']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+               <!-- <input type="text" id="no" name="no" class="form-control "
+                       placeholder="请输入会员编号"
+                       unselectable="on"
+                       onfocus="this.blur()"
+                       readonly>-->
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                姓名</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="name" class="form-control " name="name" placeholder="请输入您的姓名" value="{jlzcms:$member['name']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                性别</label>
+                <div class="col-xs-3">
+                    <div class="b-radio is-warning is-circular">
+                        <input id="man" class="styled" type="radio" name="sex" value="1" <eq name="member.sex" value="1">checked</eq> <eq name="member.is_verify" value="-1">disabled</eq>>
+                        <label for="man">
+                            男
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="b-radio is-warning is-circular">
+                        <input id="women" class="styled" type="radio" name="sex" value="2" <eq name="member.sex" value="2">checked</eq> <eq name="member.is_verify" value="-1">disabled</eq>>
+                        <label for="women">
+                            女
+                        </label>
+                    </div>
+                </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                年龄</label>
+            <div class="col-xs-8 row">
+                <input type="tel" id="age" class="form-control " name="age" placeholder="请输入您的年龄" value="{jlzcms:$member['age']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-6 control-label" >请选择您的身高</div>
+            <div class="col-xs-5 row" id="height" <eq name="member.is_verify" value="-1">disabled</eq>>
+                <input type="text" class="form-control moremes" name="height" unselectable="on"
+                       onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-6 control-label" >请选择您的体重</div>
+            <div class="col-xs-5 row" id="weight" <eq name="member.is_verify" value="-1">disabled</eq>>
+                <input type="text" class="form-control moremes" name="weight" unselectable="on"
+                       onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>户籍
+            </label>
+            <div class="col-xs-8 row">
+                <input type="text" id="household_registration" class="form-control" name="household_registration"
+                       placeholder="请认真核对后填写户籍信息" value="{jlzcms:$member['household_registration']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">民族</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="nation" class="form-control" name="nation" placeholder="请输入您的民族" value="{jlzcms:$member['nation']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">居住地</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="address" class="form-control" name="address" placeholder="请输入您的居住地" value="{jlzcms:$member['address']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                联系电话</label>
+            <div class="col-xs-8 row">
+                <input type="tel" id="tel" class="form-control" name="tel" placeholder="请输入您的联系电话" value="{jlzcms:$member['tel']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">电子邮箱</label>
+            <div class="col-xs-8 row">
+                <input type="email" id="email" class="form-control" name="email" placeholder="请输入您的邮箱号" value="{jlzcms:$member['email']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">QQ号</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="qq" class="form-control" name="qq" placeholder="请输入您的QQ号" value="{jlzcms:$member['qq']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                购房情况</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="house_status" class="form-control" name="house_status" placeholder="请输入您的购房情况" value="{jlzcms:$member['house_status']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                购车情况</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="car_status" class="form-control" name="car_status" placeholder="请输入您的购车情况" value="{jlzcms:$member['car_status']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">
+                <span class="redstar">*</span>
+                婚姻情况</label>
+            <div class="col-xs-8 row">
+                <div class="b-radio is-warning is-circular">
+                    <input id="radio1" class="styled" type="radio" name="marital_status" value="1" <eq name="member.marital_status" value="1">checked</eq> <eq name="member.is_verify" value="-1">disabled</eq>>
+                    <label for="radio1">
+                        未婚
+                    </label>
+                </div>
+                <div class="b-radio is-warning is-circular">
+                    <input id="radio2" class="styled" type="radio" name="marital_status" value="2" <eq name="member.marital_status" value="2">checked</eq> <eq name="member.is_verify" value="-1">disabled</eq>>
+                    <label for="radio2">
+                        离异
+                    </label>
+                </div>
+                <div class="b-radio is-warning is-circular">
+                    <input id="radio3" class="styled" type="radio" name="marital_status" value="3" <eq name="member.marital_status" value="3">checked</eq> <eq name="member.is_verify" value="-1">disabled</eq>>
+                    <label for="radio3">
+                        丧偶
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-6 control-label" >请选择你的学历</div>
+            <div class="col-xs-5 row" id="education" <eq name="member.is_verify" value="-1">disabled</eq>>
+                <input type="text" class="form-control moremes" name="education" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">毕业学校</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="graduate_institution" class="form-control" name="graduate_institution" placeholder="请输入您的学校" value="{jlzcms:$member['graduate_institution']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">专业</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="major" class="form-control" name="major" placeholder="请输入您的专业" value="{jlzcms:$member['major']}" <eq name="member.is_verify" value="-1">readonly</eq>>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="remarks">注：打“*”号为必填项</div>
+<div class="text-center">
+    <button type="submit" class="btn" id="nextStep">下一步</button>
+</div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<!--学历，身高，体重的选择-->
+<script>
+//    var education = ["无","小学","初中","中专","高中","职高","大专","本科","研究生","博士生"];
+//    var Height = ["131CM","132CM","133CM","134CM","135CM","136CM","137CM","138CM","139CM","140CM","141CM","142CM","143CM","144CM","145CM","146CM","147CM","148CM","149CM","150CM","151CM","152CM","153CM","154CM","155CM","156CM","157CM","158CM","159CM","160CM","161CM","162CM","163CM","164CM","165CM","166CM","167CM","168CM","169CM","170CM","171CM","172CM","173CM","174CM","175CM","176CM","177CM","178CM","179CM","180CM","181CM","182CM","183CM","184CM","185CM","186CM","187CM","188CM","189CM","190CM","191CM","192CM","193CM","194CM","195CM","196CM","197CM","198CM","199CM","200CM","201CM","202CM","203CM","204CM","205CM","206CM","207CM","208CM","209CM","210CM","211CM","212CM","213CM","214CM","215CM","216CM","217CM","218CM","219CM","220CM","221CM","222CM","223CM","224CM","225CM","226CM","227CM","228CM","229CM","230CM","231CM","232CM","233CM","234CM","235CM","236CM","237CM","238CM","239CM","240CM"];
+//    var Weight = ["31KG","32KG","33KG","34KG","35KG","36KG","37KG","38KG","39KG","40KG","41KG","42KG","43KG","44KG","45KG","46KG","47KG","48KG","49KG","50KG","51KG","52KG","53KG","54KG","55KG","56KG","57KG","58KG","59KG","60KG","61KG","62KG","63KG","64KG","65KG","66KG","67KG","68KG","69KG","70KG","71KG","72KG","73KG","74KG","75KG","76KG","77KG","78KG","79KG","80KG","81KG","82KG","83KG","84KG","85KG","86KG","87KG","88KG","89KG","90KG","91KG","92KG","93KG","94KG","95KG","96KG","97KG","98KG","99KG","100KG","101KG","102KG","103KG","104KG","105KG","106KG","107KG","108KG","109KG","110KG","111KG","112KG","113KG","114KG","115KG","116KG","117KG","118KG","119KG","120KG"];
+
+    var education = {jlzcms:$education};
+    var height = {jlzcms:$height};
+    var weight = {jlzcms:$weight};
+    var is_verify = {jlzcms:$is_verify};
+    if(is_verify != -1) {
+        var educationSelect = new MobileSelect({
+            trigger: '#education',
+            title: '选择学历',
+            wheels: [
+                {data: education}
+            ],
+            position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+                console.log(data);
+            },
+            callback:function(indexArr, data){
+                console.log(data);
+            }
+        });
+        var heightSelect = new MobileSelect({
+            trigger: '#height',
+            title: '选择身高(厘米)',
+            wheels: [
+                {data: height}
+            ],
+            position:[29], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+                console.log(data);
+            },
+            callback:function(indexArr, data){
+                console.log(data);
+            }
+        });
+        var weightSelect = new MobileSelect({
+            trigger: '#weight',
+            title: '选择体重(公斤)',
+            wheels: [
+                {data: weight}
+            ],
+            position:[19], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+//            console.log(data);
+            },
+            callback:function(indexArr, data){
+                console.log(data);
+            }
+        });
+    }
+    if("{jlzcms:$member.height}" != null && "{jlzcms:$member.height}" != '') {
+        $('#height').text("{jlzcms:$member.height}");
+    }
+    if("{jlzcms:$member.weight}" != null && "{jlzcms:$member.weight}" != '') {
+        $('#weight').text("{jlzcms:$member.weight}");
+    }
+    if("{jlzcms:$member['education']}" != null && "{jlzcms:$member['education']}" != '') {
+        $('#education').text("{jlzcms:$member['education']}");
+    }
+</script>
+<!--表单验证-->
+<script>
+    //        弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+    $(function(){
+        $('#nextStep').click(function(){
+            if(is_verify == -1) {
+                window.location.href = "{jlzcms::U('Union/jiayuan2',array('token'=>$token,'id'=>$id))}";
+                return;
+            }
+
+            var reg     =  /^1(3|4|5|6|7|8|9)\d{9}$/ ;
+            var member_no    = $.trim($('#member_no').val());
+            var name      = $.trim($('#name').val());
+            var sex       = $.trim($('input[name="sex"]:checked').val());
+            var age       = $.trim($('#age').val());
+            var height    = $.trim($('#height').text());
+            var weight    = $.trim($('#weight').text());
+            var household_registration  = $.trim($('#household_registration').val());
+            var nation    = $.trim($('#nation').val());
+            var address   = $.trim($('#address').val());
+            var tel       = $.trim($('#tel').val());
+            var email     = $.trim($('#email').val());
+            var qq        = $.trim($('#qq').val());
+            var house_status   = $.trim($('#house_status').val());
+            var car_status     = $.trim($('#car_status').val());
+            var marital_status    = $.trim($('input[name="marital_status"]:checked').val());
+            var education = $.trim($('#education').text());
+            var graduate_institution   = $.trim($('#graduate_institution').val());
+            var major     = $.trim($('#major').val());
+
+            console.log(member_no);
+            console.log(name);
+            console.log(sex);
+            console.log(age);
+            console.log(height);
+            console.log(weight);
+            console.log(household_registration);
+            console.log(nation);
+            console.log(address);
+            console.log(tel);
+            console.log(email);
+            console.log(qq);
+            console.log(house_status);
+            console.log(car_status);
+            console.log(marital_status);
+            console.log(education);
+            console.log(graduate_institution);
+            console.log(major);
+
+            // 判断手机号是否输入
+            if(tel === ''){
+                toast('请填写您的手机号！');
+                $('#tel').focus();
+                return;
+            } else {
+                if(!reg.test(tel)){
+                    toast('手机号码格式不正确！');
+                    $('#tel').focus();
+                    return;
+                }
+            }
+            if(name === ''){
+                toast('请填写您的姓名！');
+                $('#name').focus();
+                return;
+            }
+            if(age === ''){
+                toast('请填写您的年龄！');
+                $('#age').focus();
+                return;
+            }
+            if(sex === ''){
+                toast('请选择您的性别！');
+                $('#sex').focus();
+                return;
+            }
+            if( marital_status=== ''){
+                toast('请选择您的婚姻情况！');
+                $('#marital_status').focus();
+                return;
+            }
+            if(household_registration === ''){
+                toast('请填写您的籍贯！');
+                $('#household_registration').focus();
+                return;
+            }
+            // 购房情况是否输入
+            if(house_status === ''){
+                toast('请填写您的购房情况！');
+                $('#house_status').focus();
+                return;
+            }
+            // 购车情况是否输入
+            if(car_status === '') {
+                toast('请填写您的购车情况！');
+                $('#car_status').focus();
+                return;
+            }
+            $("#nextStep").attr('disabled','true');
+            $.ajax({
+                type: "POST",
+                url: "{jlzcms::U('Union/addJiayuanMember1',array('token'=>$token,'wecha_id'=>$wecha_id,'id'=>$id))}",
+                data: {
+                    'member_no':member_no,
+                    'name':name,
+                    'age':age,
+                    'sex':sex,
+                    'height':height,
+                    'weight':weight,
+                    'household_registration':household_registration,
+                    'nation':nation,
+                    'address':address,
+                    'tel':tel,
+                    'email':email,
+                    'qq':qq,
+                    'house_status':house_status,
+                    'car_status':car_status,
+                    'marital_status':marital_status,
+                    'education':education,
+                    'graduate_institution':graduate_institution,
+                    'major':major
+                },
+                dataType: "json",
+                error: function () {
+                    toast('Error loading XML document');
+                },
+                success: function(data) {
+                    toast(data.msg);
+                    if(data.status == 1){
+                        setTimeout(function () {
+                            window.location.href = "{jlzcms::U('Union/jiayuan2',array('id'=>'" + data.id + "'))}";
+                        }, 2000);
+                    }
+                    else { $("#submit").removeAttr('disabled');}
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

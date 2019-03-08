@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>佳缘一线牵</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        *{margin:0; padding: 0;}
+        body{
+            max-width: 100%;
+            margin:0 auto;
+            background:url("http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/bj.png") no-repeat top center;
+            background-size:cover;
+            text-align:center;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+        .pic{
+            width:100%;
+            height:130px;
+        }
+        .pic div img{
+            width:118px;
+            height: 118px;
+        }
+        .pic p img{
+            margin-right: 6px;
+            width: 19px;
+            height: 17px;
+        }
+        .top{
+            margin-top: 25%;
+        }
+        .down{
+            margin-top: 20%;
+        }
+        .pic p{
+            text-align: center;
+            height:43px;
+            line-height: 43px;
+        }
+        ul, li { list-style:none; margin:0;}
+        .top_bar { position: fixed; z-index: 900; bottom: 0; left: 0; right: 0; margin: auto; font-family: Helvetica, Tahoma, Arial, Microsoft YaHei, sans-serif; overflow: hidden}
+        .top_menu { display:-webkit-box; border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc;width: 100%; background: #f9f9f9; height: 48px; display: -webkit-box; display: box; margin:0; padding:0; -webkit-box-orient: horizontal;}
+        .top_bar .top_menu>li { -webkit-box-flex:1;padding:7px 0;text-align:center; }
+        .top_menu>li:first-child { background:none; }
+        .top_bar .top_menu>li>a img {height: 34px; width: 34px;}
+        .top_bar li:first-child a { display: block; }
+        .top_menu li:last-of-type a { background: none; }
+        a:link {text-decoration: none;}/* 未被访问的链接 */
+        a:visited {text-decoration: none;}/* 已被访问的链接 */
+        a:hover {text-decoration: none;}/* 鼠标指针移动到链接上 */
+        a:active {text-decoration: none;}/* 正在被点击的链接 */
+    </style>
+</head>
+<body>
+<div class="pic top">
+    <a href="{jlzcms::U('Union/jiayuanMemberList',array('token'=>$_GET['token'],'sex'=>2))}" style="color:#fe7c9d">
+    <div class=""><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/girlpic.png" alt="" ></div>
+    <p><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/sex_03.png" alt="">只看女生</p>
+    </a>
+</div>
+<div class="pic down">
+    <a href="{jlzcms::U('Union/jiayuanMemberList',array('token'=>$_GET['token'],'sex'=>1))}" style="color:#389fef">
+    <div class=""><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/boypic.png" alt="" ></div>
+    <p><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/sex_06.png" alt="">只看男生</p>
+    </a>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--底部导航-->
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+    <nav>
+        <ul id="top_menu" class="top_menu">
+            <li>
+                <a href="{jlzcms::U('Index/index',array('token'=>$_GET['token'],'classid'=>1))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/8/b/4/6/59f2dc678276c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Index/lists',array('token'=>$_GET['token'],'classid'=>2235))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/e/8/f/f/59f2dd5091b0c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Union/perCenter',array('token'=>$_GET['token']))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/a/2/5/e/59f2dd65c8178.png"  />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Commonshare -->
+<include file="Common:share" />
+</body>
+</html>

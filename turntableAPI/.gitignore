@@ -1,0 +1,21 @@
+	# Dependencies
+node_modules/
+
+# Production
+/dist/
+
+# Misc
+.idea
+.DS_Store
+npm-debug.log*
+
+# Webstorm
+/.idea
+
+# Service
+.vscode
+*.suo
+bin/
+obj/
+packages/
+.vs/

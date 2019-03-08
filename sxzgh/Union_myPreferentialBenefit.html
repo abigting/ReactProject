@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商家优惠</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入样式和js文件 -->
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+            word-break:break-all;
+        }
+        /*内容*/
+        .unionAdvice{
+            margin-top: 0.2rem;
+        }
+        .preferential .queTime{
+            color: #cccccc;
+            font-size: 11px;
+        }
+        .preferential .col-xs-1{
+            margin-bottom: 3rem;
+        }
+        .preferential .col-xs-11{
+            margin-top: 0.7rem;
+            margin-bottom: 0.7rem;
+        }
+        .preferential{
+            background-color: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .preferential .col-xs-1 img{
+            width: 2rem;
+        }
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/login3/fav.jpg" class="borderStyle goTo"></div>
+    </div>
+</div>
+<!--咨询内容部分-->
+<div class="container-fluid">
+    <volist name="list" id="vo">
+        <div class="unionAdvice">
+            <div class="row preferential">
+                <div class="col-xs-1">
+                    <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/login3/oclock.png" alt="">
+                </div>
+                <div class="col-xs-10">
+                    <span class="queTime">{jlzcms:$vo.create_time|date="Y-m-d H:i:s",###}</span>
+                </div>
+                <div class="col-xs-11">
+                    {jlzcms:$vo.material_benefit}
+                </div>
+            </div>
+        </div>
+    </volist>
+<!--    <div class="unionAdvice">
+        <div class="row preferential">
+            <div class="col-xs-1">
+                <img src="img/oclock.png" alt="">
+            </div>
+            <div class="col-xs-10">
+                <span class="queTime">2017.098.06 15:26 </span>
+            </div>
+            <div class="col-xs-11">
+                我国《劳动法》规定，“工资应当以货币形式按月支付给劳动者本人。不得克扣或者无故拖欠劳动者的工资”，“按月支付”即包括工资应当以月薪的形式发放，也包括应当每月支付，因此用人单位应当在自然月结束的30天内结算工资，超过30天即构成拖欠工资。
+            </div>
+        </div>
+    </div>-->
+</div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    $(".goTo").click(function(){
+        window.location.href = "{jlzcms::U('Union/preferentialBenefits',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+    });
+</script>
+<!-- Commonshare -->
+<include file="Common:share" />
+</body>
+</html>

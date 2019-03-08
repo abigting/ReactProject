@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>福利申报</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 引入样式和js文件 -->
+    <link rel="stylesheet" type="text/css" href="./tpl/static/unicon/date/css/union_jiayuan.css">
+    <style>
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/welfare.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--表单部分-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <input type="hidden" name="merchant_id" value="{jlzcms:$merchant_id}" />
+        <div class="form-group col-xs-12 ">
+            <label class="col-xs-12 control-label">要申报的福利</label>
+            <div class="col-xs-12 ">
+                <textarea class="form-control" id="materialBenefits" name="materialBenefits" placeholder="请输入您要申报的福利"
+                          cols="27"
+                          rows="10"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="text-center">
+    <button type="submit" class="btn" id="submit">提交</button>
+</div>
+<div style="text-align:center;margin-top: 1rem">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--表单验证-->
+<script>
+    //        弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+    $(function(){
+        $('#submit').click(function(){
+            $("#submit").attr('disabled','true');
+            var material_benefit= $.trim($('#materialBenefits').val());
+            console.log(material_benefit);
+            if(material_benefit === ''){
+                toast('请填写您要申请的福利');
+                $('#materialBenefits').focus();
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "{jlzcms::U('Union/applyPreferentialBenefit',array('token'=>$token,'wecha_id'=>$wecha_id))}",
+                data: {
+                    'material_benefit':material_benefit
+                },
+                dataType: "json",
+                success: function(data) {
+                    toast(data.msg);
+                    if(data.status == 1){
+                        setTimeout(function () {
+                            window.location.href = "{jlzcms::U('Union/myPreferentialBenefit',array('token'=>$token))}";
+                        }, 1000);
+                    } else {
+                        $("#submit").removeAttr('disabled');
+                    }
+                }
+            });
+        });
+    });
+</script>
+<!-- Commonshare -->
+<include file="Common:share" />
+</body>
+</html>

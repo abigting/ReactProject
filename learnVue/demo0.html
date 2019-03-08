@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FionaFeng</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="./transfer.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        body {
+            font-family: Arial, "Helvetica Neue", "Helvetica", "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h4 {
+            font-size: 0.83em;
+        }
+
+        h1, h4 {
+            margin-top: 0;
+            margin-bottom: .5em;
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+        }
+
+        .leftBox, .rightBox {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #d9d9d9;
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .buttonBox button {
+            margin: 8px 0 8px 0;
+            display: block;
+            margin-left: 8px !important;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 0;
+        }
+
+        li {
+            list-style: none;
+            height: 50px;
+            line-height: 50px;
+            margin: 0;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .active {
+            background: rgba(0, 160, 233, .5);
+            color: #fff;
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-to
+            /* .slide-fade-leave-active for below version 2.1.8 */ {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+        /*slideUp*/
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .slideUp-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slideUp-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slideUp-fade-enter, .slideUp-fade-leave-to
+            /* .slide-fade-leave-active for below version 2.1.8 */ {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-row type="flex" justify="center">
+        <el-col :span="3" style="text-align: center">
+            <div class="leftBox">
+                <ul>
+                    <li v-for="(list, index) in leftList"
+                        :class="{'active':status === list.id}"
+                        @click="changeBgc(list.id)"
+                        @dblclick="move(0)">
+                        {{ list.action }}
+                    </li>
+                </ul>
+
+                示例：{{example}}
+            </div>
+        </el-col>
+    </el-row>
+    <el-row>
+        <el-col :span="24">
+            <el-input v-model="input.name" placeholder="请输入内容"></el-input>
+        </el-col>
+        <el-col :span="24">
+            {{ input.name}}
+        </el-col>
+    </el-row>
+    <el-row>
+        <div id="demo">
+            <el-button @click="show = !show">
+                Toggle
+            </el-button>
+            <transition name="fade">
+                <p v-if="show">hello</p>
+            </transition>
+        </div>
+    </el-row>
+    <el-row>
+        <div id="example-1">
+            <el-button @click="slide = !slide">
+                Toggle render
+            </el-button>
+            <transition name="slide-fade">
+                <p v-if="slide">hello</p>
+            </transition>
+        </div>
+    </el-row>
+    <el-row>
+        <div>
+            <el-button @click="slideUp = !slideUp">
+                slideUp render
+            </el-button>
+            <transition name="slideUp-fade">
+                <p v-if="slideUp">slide up</p>
+            </transition>
+        </div>
+    </el-row>
+</div>
+<script>
+    var list = [];
+    new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            slide:true,
+            slideUp:true,
+            disabled: true,
+            input: {
+                name:''
+            },
+            status: '',
+            place: '',
+            example: '',
+            leftList: [
+                {
+                    id: 0,
+                    action: '0'
+                },
+                {
+                    id: 1,
+                    action: '1'
+                }
+            ],
+        },
+
+        methods: {
+            changeBgc: function (s) {
+                this.status = s;
+                switch (s) {
+                    case 0:
+                        this.example = '你好啊';
+                        break;
+                    case 1:
+                        this.example = '今天不好';
+                        break;
+                    case 2:
+                }
+            },
+        }
+    })
+</script>
+</body>
+</html>

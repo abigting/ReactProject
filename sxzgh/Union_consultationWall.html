@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>咨询墙</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入样式和js文件 -->
+    <link href="./tpl/Enterprise/common/Qt/style/js/dropload.css" rel="stylesheet">
+
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+            /*word-break:break-all;*/
+        }
+        .row{
+            overflow: hidden;
+        }
+        /*内容*/
+        .ansgreen{
+            color: #12c216;
+            border:2px solid #12c216;
+            border-radius: 5px;
+            padding: 2px;
+            margin-left: 1rem;
+            font-size: 11px;
+        }
+        .ansred{
+            color: #fc6238;
+            border:2px solid #fc6238;
+            border-radius: 5px;
+            padding: 2px;
+            margin-left: 1rem;
+            font-size: 11px;
+        }
+        .answer{
+            display: none;
+        }
+        .question .queTime{
+            color: #cccccc;
+            font-size: 11px;
+        }
+        .slide{
+            float: right;
+            margin-right: 15px;
+            margin-top: -3.5rem;
+        }
+        .question{
+            background-color: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 0.5rem;
+        }
+        .perPho{
+            width: 2.5rem;
+            margin-top: -0.5rem;
+        }
+        .question .col-xs-1:nth-child(3) img{
+            width: 2rem;
+            margin: 0.3rem;
+        }
+        .question .col-xs-11{
+            font-size: 20px;
+        }
+        .question .col-xs-1:nth-child(3){
+            padding-top: 0.4rem;
+        }
+        .question .col-xs-10:nth-child(4){
+            font-size: 16px;
+            padding-top: 0.7rem;
+            padding-bottom: 0.7rem;
+        }
+        .question .col-xs-10:nth-child(5){
+            padding-top: 0.5rem;
+        }
+        .answer{
+            background-color: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-top: 0.2rem;
+        }
+        .answer .col-xs-1:nth-child(1) img{
+            width: 2rem;
+        }
+        .answer .col-xs-1:nth-child(1){
+            margin-left: 0.3rem;
+        }
+        .answer .col-xs-10:nth-child(2){
+            padding-left: 10px;
+            font-size: 14px;
+            color: #2577c4;
+            margin-bottom: 0.25rem;
+            margin-top: 0.25rem;
+        }
+        .answer .answerMes{
+            font-size: 14px;
+            margin-top: 0.7rem;
+            margin-bottom: 0.7rem;
+            margin-left:2.7rem;
+        }
+        .iconHide{
+            display: none;
+        }
+        /*搜索框*/
+        .search{
+            width: 100%;
+            background: #fff;
+            padding: 5px;
+            margin-top: -6px;
+        }
+        .search input{
+            -webkit-appearance:none;
+            height: 30px;
+            font-size: 14px;
+            outline: none;
+            text-align: center;
+            border: 1px solid #dedede;
+            border-radius: 15px;
+            width: 80%;
+            margin-left: 10%;
+            padding-left: 10px;
+        }
+        .top_bar ul{ list-style:none; margin:0;}
+        .top_bar li{ list-style:none; margin:0;}
+        .top_bar { position: fixed; z-index: 900; bottom: 0; left: 0; right: 0; margin: auto; font-family: Helvetica, Tahoma, Arial, Microsoft YaHei, sans-serif; overflow: hidden}
+        .top_menu { display:-webkit-box; border-top: 1px solid #dcdcdc;border-bottom: 1px solid #dcdcdc;width: 100%; background: #f9f9f9; height: 65px; display: -webkit-box; display: box; margin:0; padding:0; -webkit-box-orient: horizontal;}
+        .top_bar .top_menu>li { -webkit-box-flex:1;padding:7px 0;text-align:center; }
+        .top_menu>li:first-child { background:none; }
+        .top_bar .top_menu>li>a img {height: 50px; width: 50px;}
+        .top_bar li:first-child a { display: block; }
+        .top_menu li:last-of-type a { background: none; }
+
+        .container-fluid {
+            margin-bottom: 8rem;
+        }
+
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/lawAdvice/wall.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--搜索-->
+<div class="search">
+    <div class="">
+        <form action="" method="post" style="text-align: center">
+            <input type="search" id="input" name="keyword"  class="form-control am-round" placeholder="搜索" value="{jlzcms:$searchName}">
+        </form>
+    </div>
+</div>
+<!--咨询内容部分-->
+<div class="container-fluid">
+
+</div>
+<div class="now"></div>
+<div style="text-align:center;margin-top: 1rem;margin-bottom: 7rem">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<!--底部导航-->
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+    <nav>
+        <ul id="top_menu" class="top_menu">
+            <li>
+                <a href="{jlzcms::U('Index/index',array('token'=>$_GET['token'],'classid'=>1))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/8/b/4/6/59f2dc678276c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Index/lists',array('token'=>$_GET['token'],'classid'=>2235))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/1/1/7/b/59f2dd3a176a4.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Union/perCenter',array('token'=>$_GET['token']))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/a/2/5/e/59f2dd65c8178.png"  />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#input").focus(function(){
+            $(".search input").css('text-align','left');
+        });
+        $("#input").blur(function(){
+            $(".search input").css('text-align','center');
+        });
+    });
+</script>
+<!--下拉加载-->
+<script src="./tpl/Enterprise/common/Qt/style/js/dropload.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        allData();
+        function allData(){
+            var counter = 0;
+            var num = 2;
+            var searchName = $("#input").val();
+            console.log(searchName);
+            var pageStart = 0, pageEnd = 0;
+            $('.now').dropload({
+                scrollArea: window,
+                loadDownFn: function (me) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{jlzcms::U('Union/consultationWallList',array('token'=>$token,'searchName'=>'"+searchName+"'))}",
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == 1) {
+                                var data = data.data;
+                                counter++;
+                                pageEnd = num * counter;
+                                pageStart = pageEnd - num;
+
+                                for (var i = pageStart; i < pageEnd; i++) {
+                                    var a = 'all' + i;
+                                    var statusName;
+                                    var status = data[i].status;
+                                    var times =new Date(parseInt(data[i].create_time) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ').substr(5);
+                                    if(status ==0){
+                                        statusName = '待解答';
+                                    }else{
+                                        statusName = '已解答';
+                                    }
+                                        var html = '<div class="unionAdvice" id="' + a + '"> ' +
+                                            '<div class="row question"><div class="col-xs-1">  ' +
+                                            '<img src='+data[i].portrait+' alt="" class="perPho">' +
+                                            '</div>' +
+                                            '<div class="col-xs-11">'+data[i].wechaname+'</div> ' +
+                                            '<div class="col-xs-1">' +
+                                            '<img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/lawAdvice/problem.png" alt=""> ' +
+                                            '</div>' +
+                                            '<div class="col-xs-10">'+data[i].description+' </div>' +
+                                            '<div class="col-xs-10"><span class="queTime">'+times+'</span> ' +
+                                            '<span class="unionState"></span>' +
+                                            '</div> ' +
+                                            '<div class="col-xs-1 slide">' +
+                                            '</div> ' +
+                                            '</div> ' +
+                                            '<div class="row answer">'+
+                                            '</div> ' +
+                                            '</div>';
+
+                                    $('.container-fluid').append(html);
+                                    if(status ==1){
+                                   var unionState= '<span class="ansred">'+statusName+'</span>';
+                                        var slide= '<i class="icon iconfont slideDown">&#xe610;</i>' +
+                                                    '<i class="icon iconfont slideUp iconHide">&#xe659;</i>';
+                                        var answer= '<div class="col-xs-1">'+
+                                                    '<img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/lawAdvice/message.png" alt="">'+
+                                                    '</div>'+
+                                                    '<div class="col-xs-10">为你解答</div>'+
+                                                    '<div class="col-xs-10 answerMes ">'+data[i].reply.description+'</div>';
+                                        $('#' + a).find('.unionState').append(unionState);
+                                        $('#' + a).find('.slide').append(slide);
+                                        $('#' + a).find('.answer').append(answer);
+                                    }
+                                    else{
+                                     var unionState= '<span class="ansgreen">'+statusName+'</span>';
+                                        $('#' + a).find('.unionState').append(unionState);
+                                    }
+                                    if ((i + 1) >= data.length) {
+                                        // 锁定
+                                        me.lock();
+                                        // 无数据
+                                        me.noData();
+                                        break;
+                                    }
+                                }
+                                $('.slide').unbind('click',useToggle);
+                                toggleStyle();
+                                me.resetload();
+                            }else{
+                                $('.now').empty();
+                                $('.container-fluid').html('<div style="color: #ccc;text-align: center;margin-top: 40%">\n' +
+                                    '          <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/noMessage2.png" alt="" style="width: 42%">\n' +
+                                    '      </div>');
+                            }
+                        },
+                        error: function (xhr, type) {
+                            // alert('Ajax error!');
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    })
+                }
+            })
+        }
+    });
+    function  toggleStyle(){
+        $(".slide").bind('click',useToggle);
+    }
+
+    function useToggle(){
+        $(this).parent().siblings('.answer').slideToggle();
+        $(this).children('.slideDown').toggleClass('iconHide');
+        $(this).children('.slideUp').toggleClass('iconHide');
+    }
+</script>
+<!--搜索-->
+<script>
+    $("#input").on('keypress',function(e) {
+        var keycode = e.keyCode;
+        var searchName = $(this).val();
+        if(keycode=='13') {
+            e.preventDefault();
+            console.log(searchName);
+            window.location.href = "{jlzcms::U('Union/consultationWall',array('token'=>$token,'wecha_id'=>$wecha_id,'searchName'=>'"+searchName+"'))}";
+        }
+    });
+</script>
+<!-- Commonshare -->
+<include file="Common:share" />
+</body>
+</html>

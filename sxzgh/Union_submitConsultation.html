@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交咨询</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- 引入样式和js文件 -->
+    <link rel="stylesheet" type="text/css" href="css/union_jiayuan.css">
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+
+    </style>
+
+
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/lawAdvice/tijiaozixun.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--表单部分-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <!--<div class="form-group col-xs-12 row">-->
+            <!--<label class="col-xs-4 control-label">-->
+                <!--<span class="redstar">*</span>-->
+                <!--咨询类型</label>-->
+            <!--<div class="col-xs-8 row">-->
+                <!--<div class="b-radio is-warning is-circular">-->
+                    <!--<input id="common" class="styled" checked type="radio" name="type" value="1">-->
+                    <!--<label for="common">-->
+                        <!--普通咨询-->
+                    <!--</label>-->
+                <!--</div>-->
+                <!--<div class="b-radio is-warning is-circular">-->
+                    <!--<input id="law" class="styled" type="radio" name="type" value="2">-->
+                    <!--<label for="law">-->
+                        <!--法律咨询-->
+                    <!--</label>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">
+                姓名
+            </label>
+            <div class="col-xs-8 row">
+                <input type="text" id="submitName" class="form-control " name="submitName" placeholder="请输入您的姓名" value="{jlzcms:$name}">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">电话</label>
+            <div class="col-xs-8 row">
+                <input type="tel" id="submitTel" class="form-control " name="submitTel" placeholder="请输入您的电话" value="{jlzcms:$tel}">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">咨询内容</label>
+            <div class="col-xs-8 row">
+                <textarea id="submitConent" class="form-control" name="submitConent" placeholder="请输入您的咨询内容" cols="27" rows="5"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="text-center">
+    <button type="submit" class="btn " id="submit">提交</button>
+</div>
+<div style="text-align:center;margin-top: 1rem;">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<!--表单验证-->
+<script>
+    //        弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+    $(function(){
+        $('#submit').click(function(){
+            var submitName= $.trim($('#submitName').val());
+            var submitTel = $.trim($('#submitTel').val());
+            var submitConent= $.trim($('#submitConent').val());
+            var reg     =  /^1(3|4|5|6|7|8|9)\d{9}$/ ;
+
+            console.log(submitName);
+            console.log(submitTel);
+            console.log(submitConent);
+            if(submitName=== ''){
+                toast('请填写您的姓名');
+                $('#submitName').focus();
+                return;
+            }
+            if(submitTel=== ''){
+                toast('请填写您的电话');
+                $('#submitTel').focus();
+                return;
+            }
+            if(!reg.test(submitTel)){
+                toast('您输入的号码有误');
+                $('#submitTel').focus();
+                return;
+            }
+            if(submitConent === '') {
+                toast('请填写您的咨询内容');
+                $('#submitConent').focus();
+                return;
+            }
+            $("#submit").attr('disabled','true');
+            $.ajax({
+                type: "POST",
+                url: "{jlzcms::U('Union/submitConsultation',array('token'=>$token,'wecha_id'=>$wecha_id))}",
+                data: {
+                    'type' : {jlzcms:$type},
+                    'name':submitName,
+                    'tel':submitTel,
+                    'description':submitConent,
+                },
+                dataType: "json",
+                success: function(data) {
+                    toast(data.msg);
+                    if(data.status == 1){
+                        setTimeout(function () {
+//                            if(data.type == 1) {
+//                                window.location.href = "{jlzcms::U('Union/consultationWall',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+//                            } else {
+//                                window.location.href = "{jlzcms::U('Union/lawConsultation',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+//                            }
+                            window.location.href = "{jlzcms::U('Union/myConsultation',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+                        }, 1000);
+                    }
+                    else { $("#submit").removeAttr('disabled');}
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

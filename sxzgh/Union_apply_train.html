@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>培训申请</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 引入样式和js文件 -->
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./tpl/static/unicon/date/src/css/layui.mobile.css">
+    <script src="./tpl/static/unicon/date/js/mobileSelect.min.js"></script>
+    <link href="./tpl/static/unicon/date/css/mobileSelect.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+        label {
+            font-size: 1.4rem !important;
+        }
+        #course{
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/trainReply.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--表单部分FXT-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">单位名称</label>
+            <div class="col-xs-8 ">
+                <input type="text" id="name" class="form-control " name="name" placeholder="请输入名称">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">单位地址</label>
+            <div class="col-xs-8">
+                <input type="text" id="company_address" class="form-control " name="company_address" placeholder="请输入地址">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">职工总数</label>
+            <div class="col-xs-8 ">
+                <input type="number" id="worker_num" class="form-control " name="worker_num" placeholder="请输入总数">
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">参加培训人数</label>
+            <div class="col-xs-7" style="margin-left: -2.5rem">
+                <input type="number" id="participator_num" class="form-control" name="participator_num" placeholder="请输入人数">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">申请课程</label>
+            <div class="col-xs-8 " id="course">
+                <input type="text"  class="form-control" name="course"
+                       placeholder="请输入课程" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">申请培训时间</label>
+            <div class="col-xs-7 layui-inline" style="margin-left: -2.5rem">
+                <input type="text" id="training_time" class="layui-input form-control" name="training_time"
+                       placeholder="请输入时间" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">联系电话</label>
+            <div class="col-xs-8 ">
+                <input type="tel" id="tel" class="form-control" name="tel" placeholder="请输入您的联系电话">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-6 control-label" >培训场地(m²)</label>
+            <div class="col-xs-6" style="margin-left: -5.4rem">
+                <input type="text" id="site_area" class="form-control" name="site_area" placeholder="请输入场地大小">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">联系人姓名</label>
+            <div class="col-xs-8 ">
+                <input type="text" id="contact_name" class="form-control" name="contact_name" placeholder="请输入姓名">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">联系人职务</label>
+            <div class="col-xs-8 ">
+                <input type="text" id="contact_post" class="form-control" name="contact_post" placeholder="请输入职务">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">联系人电话</label>
+            <div class="col-xs-8 ">
+                <input type="tel" id="contact_tel" class="form-control" name="contact_tel" placeholder="请输入电话">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">联系人手机</label>
+            <div class="col-xs-8">
+                <input type="number" id="contact_phone" class="form-control" name="contact_phone" placeholder="请输入手机">
+            </div>
+        </div>
+    </form>
+</div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<div class="text-center">
+    <button type="submit" class="btn" id="submit">提交</button>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<!--表单验证-->
+<script src="./tpl/static/unicon/date/src/layui.js"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //格子主题
+        laydate.render({
+            elem: '#training_time' //指定元素
+            //,type: 'datetime'
+            ,theme: 'grid'
+            //,range: true
+            ,trigger: 'click'
+        });
+    });
+</script>
+<!--课程选择-->
+<script>
+    var course_id;
+    var data = {jlzcms:$list};
+    var mobileSelect4 = new MobileSelect({
+        trigger: '#course',
+        title: '课程选择',
+        wheels: [
+            {data:data}
+        ],
+        transitionEnd:function(indexArr, data){
+            console.log(data);
+        },
+        callback:function(indexArr, data){
+            console.log(data[1].id);
+            course_id=data[1].id;
+            $("#course").text(data[1].value);
+//            var str = JSON.parse(data);
+        }
+    });
+    //        弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+    $(function(){
+        $('#submit').click(function(){
+            var name    = $.trim($('#name').val());
+            var company_address   = $.trim($('#company_address').val());
+            var worker_num    = $.trim($('#worker_num').val());
+            var participator_num   = $.trim($('#participator_num').val());
+            var course = $.trim($('#course').text());
+            var training_time  = $.trim($('#training_time').val());
+            var tel    = $.trim($('#tel').val());
+            var site_area  = $.trim($('#site_area').val());
+            var contact_name    = $.trim($('#contact_name').val());
+            var contact_post   = $.trim($('#contact_post').val());
+            var contact_tel    = $.trim($('#contact_tel').val());
+            var contact_phone    = $.trim($('#contact_phone').val());
+            var reg     =  /^1(3|4|5|6|7|8|9)\d{9}$/ ;
+            console.log(training_time);
+            if(name === ''){
+                toast('请输入单位名称');
+                $('#name').focus();
+                return;
+            }
+            if(company_address === ''){
+                toast('请输入单位地址');
+                $('#company_address').focus();
+                return;
+            }
+            if(worker_num === '') {
+                toast('请输入职工总数');
+                $('#worker_num').focus();
+                return;
+            }
+            if(participator_num === ''){
+                toast('请输入参加培训人数');
+                $('#participator_num').focus();
+                return;
+            }
+            if(course === '') {
+                toast('请输入课程');
+                $('#course').focus();
+                return;
+            }
+            if(training_time === ''){
+                toast('请输入时间');
+                $('#training_time').focus();
+                return;
+            }
+            if(tel === ''){
+                toast('请输入您的联系电话');
+                $('#tel').focus();
+                return;
+            }else{
+                if(!reg.test(tel)){
+                    toast('手机号码不正确')
+                    $('#tel').focus();
+                    return;
+                }
+            }
+            if(site_area === ''){
+                toast('请输入场地大小');
+                $('#site_area').focus();
+                return;
+            }
+            if(contact_name === '') {
+                toast('请输入联系人姓名');
+                $('#contact_name').focus();
+                return;
+            }
+            if(contact_post === ''){
+                toast('请输入联系人职务');
+                $('#contact_post').focus();
+                return;
+            }
+            if(contact_tel=== ''){
+                toast('请输入联系人电话');
+                $('#contact_tel').focus();
+                return;
+            }
+            if(contact_phone=== '') {
+                toast('请输入联系人手机号');
+                $('#contact_phone').focus();
+                return;
+            }else{
+                if(!reg.test(contact_phone)){
+                    toast('手机号码不正确')
+                    $('#contact_phone').focus();
+                    return;
+                }
+            }
+            var worker_num=parseInt(worker_num);
+            var participator_num=parseInt(participator_num);
+            if(worker_num<=0){
+                toast('职工人数不能少于0');
+                $('#worker_num').focus();
+                return;
+            }
+            if(participator_num<=0){
+                toast('参加培训人数不能少于0');
+                $('#participator_num').focus();
+                return;
+            }
+            if(worker_num<participator_num){
+                toast('职工人数不能少于参加培训人数');
+                return;
+            }
+            $("#submit").attr('disabled','true');
+            $.ajax({
+                type: "POST",
+                url: "{jlzcms::U('Union/addApplyRecord',array('token'=>$token,'wecha_id'=>$wecha_id))}",
+                data: {
+                    'name':name,
+                    'company_address':company_address,
+                    'worker_num':worker_num,
+                    'participator_num':participator_num,
+                    'course_id':course_id,
+                    'training_time':training_time,
+                    'tel':tel,
+                    'site_area':site_area,
+                    'contact_name':contact_name,
+                    'contact_post':contact_post,
+                    'contact_tel':contact_tel,
+                    'contact_phone':contact_phone
+                },
+                dataType: "json",
+                success: function(data) {
+                    toast(data.msg);
+                    if(data.status == 1){
+                        setTimeout(function () {
+                            window.location.href = "{jlzcms::U('Index/lists',array('token'=>$token,'classid'=>2247))}";
+                        }, 1000);
+                    }
+                    else { $("#submit").removeAttr('disabled');}
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

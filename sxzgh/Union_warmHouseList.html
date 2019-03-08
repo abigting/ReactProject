@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>妈咪暖心小屋</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 引入样式和js文件 -->
+    <link rel="stylesheet" type="text/css" href="./tpl/static/unicon/date/css/mobileSelect.css">
+    <link rel="stylesheet" type="text/css" href="./tpl/static/unicon/date/css/union_jiayuan.css">
+    <link href="./tpl/Enterprise/common/Qt/style/js/dropload.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./tpl/static/unicon/date/js/mobileSelect.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+            /*word-break:break-all;*/
+        }
+        .monImg{
+            text-align: center;
+        }
+        .monHouse1{
+            width:90%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .chooseTop .col-xs-8{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 0px;
+        }
+        .chooseTop .col-xs-8 p{
+            line-height: 2rem;
+        }
+        .chooseTop .col-xs-8 p:nth-child(2){
+            color: #b8b8b8;
+            font-size: 14px;
+        }
+        .homeIcon{
+            width: 3.5rem;
+            padding-left: 10px;
+            padding-right: 2px;
+        }
+        .rowBox{
+            margin: 10px;
+        }
+        .imgBox{
+            width:32%;
+            padding: 3px;
+        }
+        .chooseTop{
+            border-top: 2px;
+            border-bottom: 5px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+        .chooseTop .col-xs-1{
+            margin-top: 2rem;
+        }
+        .areaBox{
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .row{
+            background: #fff;
+        }
+        .homeMess {
+            display: none;
+        }
+        .rowBox .col-xs-10{
+            padding-left: 0;
+        }
+        .rowBox .col-xs-2{
+            padding-left: 2px;
+        }
+        #region input{
+            font-size: 16px;
+        }
+        .bigImgBox{
+            position: fixed;
+            width: 26rem;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            border:5px solid #fff;
+            box-shadow:3px 3px 4px #000;background:#fff;filter:progid:DXImageTransform.Microsoft.Shadow(Strength=4,Direction=135,Color='#000000');
+        }
+        .bigIMG{
+            width: 100%;
+        }
+        .chooseTop .col-xs-8 p:nth-child(1){
+            margin-bottom: 5px;
+            margin-left: -13px;
+        }
+        .iconHide {
+            display: none;
+        }
+    </style>
+
+
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/momHouse.jpg" class="borderStyle goTo">
+        </div>
+    </div>
+</div>
+
+<!--表单部分-->
+<div class="container-fluid">
+    <div class="row areaBox">
+        <div class="col-xs-5 control-label" >地区范围</div>
+        <div class="col-xs-5 " id="region" >
+            <input type="text" class="form-control moremes" name="region" value="{jlzcms:$region}" unselectable="on" onfocus="this.blur()" readonly>
+        </div>
+        <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+    </div>
+    <div class="unionMessge"></div>
+</div>
+<div class="now"></div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<!--底部导航-->
+<div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+    <nav>
+        <ul id="top_menu" class="top_menu">
+            <li>
+                <a href="{jlzcms::U('Index/index',array('token'=>$_GET['token'],'classid'=>1))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/8/b/4/6/59f2dc678276c.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Index/lists',array('token'=>$_GET['token'],'classid'=>2235))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/1/1/7/b/59f2dd3a176a4.png"  />
+                </a>
+            </li>
+            <li>
+                <a href="{jlzcms::U('Union/perCenter',array('token'=>$_GET['token']))}">
+                    <img src="http://wxbucket.oss-cn-hangzhou.aliyuncs.com/a/2/5/e/59f2dd65c8178.png"  />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Commonshare -->
+<include file="Common:share" />
+
+<script>
+    $(document).ready(function(){
+
+    });
+</script>
+<!--下拉加载-->
+<script src="./tpl/Enterprise/common/Qt/style/js/dropload.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var region = ["全部","越城区","柯桥区","上虞区","诸暨市","嵊州市","新昌县"];
+        var regionSelect = new MobileSelect({
+            trigger: '#region',
+            title: '单项选择',
+            wheels: [
+                {data: region}
+            ],
+            position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+//            console.log(data);
+            },
+            callback:function(indexArr, data){
+                window.location.href =
+                    "{jlzcms::U('Union/warmHouseList',array('token'=>$token,'wecha_id'=>$wecha_id,'region'=>'"+data+"'))}";
+            }
+        });
+
+        $(".goTo").click(function(){
+            window.location.href = "{jlzcms::U('Union/applyWarmHouse',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+        });
+
+        allData();
+        function allData(){
+            var counter = 0;
+            var num = 2;
+            var pageStart = 0, pageEnd = 0;
+            var region = $(".moremes").val();
+//            alert("region="+region);
+            $('.now').dropload({
+                scrollArea: window,
+                loadDownFn: function (me) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{jlzcms::U('Union/getWarmHouseList',array('token'=>$token,'region'=>'"+region+"'))}",
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == 1) {
+                                var data = data.data;
+                                counter++;
+                                pageEnd = num * counter;
+                                pageStart = pageEnd - num;
+                                for (var i = pageStart; i < pageEnd; i++) {
+                                    console.log(data[i].company_name);
+                                    var a = 'all' + i;
+                                    var feedback= data[i].feedback;
+                                    var times =new Date(parseInt(data[i].create_time) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ').substr(5);
+                                    var html =  '<div class="chooseHouse" id="' + a + '"> ' +
+                                        '<div class="row chooseTop"> ' +
+                                        '<div class=" col-xs-3 monImg" > ' +
+                                        '<img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/monHouse1.jpg" alt="" class="monHouse1"> ' +
+                                        '</div> ' +
+                                        '<div class="col-xs-8"> ' +
+                                        '<p>'+data[i].company_name+'</p> ' +
+                                        '<p><i class="icon iconfont">&#xe640;</i>'+data[i].address+'</p>' +
+                                        '</div>' +
+                                        '<div class="col-xs-1 slide "></div>' +
+                                        '</div>' +
+                                        '<div class="homeMess row"></div>'+
+                                        '</div>';
+                                    $('.unionMessge').append(html);
+                                    if(feedback === undefined|| feedback === null ){}
+                                    else{
+                                        var   slide= '<i class="icon iconfont slideDown">&#xe816;</i>' +
+                                            '<i class="icon iconfont slideUp iconHide">&#xe815;</i>';
+                                        var homeMess='<div class="row rowBox"><div class="col-xs-2" ><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/momHouse_07.jpg" alt="" class="homeIcon"></div>' +
+                                            '<div class="col-xs-10">'+data[i].feedback.propaganda_material+'</div>' +
+                                            '</div>' +
+                                            '<div class="row rowBox"><div class="col-xs-2" >' +
+                                            '<img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/momHouse_08.jpg" alt="" class="homeIcon"></div>' +
+                                            '<div class="col-xs-10">'+data[i].feedback.consumable+'</div>' +
+                                            '</div>' +
+                                            '<div class="row rowBox">' +
+                                            '<div class="col-xs-2" >' +
+                                            '<img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/monHouse_09.png" alt="" class="homeIcon">' +
+                                            '</div><div class="col-xs-10">'+data[i].feedback.feedback+'</div>' +
+                                            '</div><div class="row rowBox">' +
+                                            '<img src="'+data[i].feedback.door_plate_pic+'" alt="" class="imgBox">' +
+                                            '<img src="'+data[i].feedback.indoor_pic1+'" alt="" class="imgBox">' +
+                                            '<img src="'+data[i].feedback.indoor_pic2+'" alt="" class="imgBox">' +
+                                            '</div>';
+                                        $('#' + a).find('.slide').append(slide);
+                                        $('#' + a).find('.homeMess').append(homeMess);
+                                    }
+                                    if ((i + 1) >= data.length) {
+                                        // 锁定
+                                        me.lock();
+                                        // 无数据
+                                        me.noData();
+                                        break;
+                                    }
+                                }
+                                $('.slide').unbind('click',useToggle);
+                                toggleStyle();
+                                toBig();
+                                me.resetload();
+                            }else{
+                                $('.now').empty();
+                                $('.unionMessge').html('<div style="color: #ccc;text-align: center;margin-top: 40%">\n' +
+                                    '          <img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/percenter/noMessage6.png" alt="" style="width: 42%">\n' +
+                                    '      </div>');
+                            }
+                        },
+                        error: function (xhr, type) {
+                            // alert('Ajax error!');
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    })
+                }
+            })
+        }
+    });
+    <!--点击图片放大-->
+    function toBig(){
+        $(".imgBox").click(function(){
+            if($(".bigImgBox").length <= 0 ) {
+                var imgSrc = $(this).attr("src");
+                console.log(imgSrc);
+                var html = '<div class="bigImgBox">';
+                html += "<img src=" + imgSrc + " alt='' class='bigIMG' >";
+                html += '</div>';
+                $(".container-fluid").append(html);
+            }
+            $(".bigImgBox").click(function(){
+                $(this).remove();
+            })
+        })
+    }
+    function  toggleStyle(){
+        $(".slide").bind('click',useToggle);
+    }
+    function useToggle(){
+        $(this).parent().siblings('.homeMess').slideToggle();
+        $(this).children('.slideDown').toggleClass('iconHide');
+        $(this).children('.slideUp').toggleClass('iconHide');
+    }
+</script>
+</body>
+</html>

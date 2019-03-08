@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{jlzcms:$thisCard.cardname}</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!-- Mobile Devices Support @begin -->
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<!-- Mobile Devices Support @end -->
+<link href="{jlzcms::$staticPath}/tpl/static/card/css/main.css" rel="stylesheet" type="text/css">
+<script src="{jlzcms::$staticPath}/tpl/static/jquery.min.js" type="text/javascript"></script>
+</head>
+<body onselectstart="return true;" ondragstart="return false;">
+<div class="container card">
+    <header>
+    <div class="header card">
+        <div id="card" data-role="card" onClick="this.classList.toggle('on');">
+            <div class="front" style="background-image:url(<?php if($thisCard['diybg']!=''){?>{jlzcms:$thisCard.diybg}<?php }else{?>{jlzcms:$thisCard.bg}<?php }?>);">
+                <span class="logo"><img id="cardlogo" class="logo" src="{jlzcms:$thisCard.logo}"></span>
+                <span class="name" style="color:{jlzcms:$card.vipnamecolor};">{jlzcms:$thisCard.cardname}</span>
+                <span class="no" style="color:{jlzcms:$card.numbercolor};">{jlzcms:$thisMember.number}</span>
+            </div>
+        </div>
+        <p class="explain"><span>点击卡片查看会员卡条码</span></p>
+        
+        <div class="mask">
+            <div class="code">
+                <img src="{jlzcms::U('Card/showCode',array('token'=>$token,'cardid'=>$card['id'],'textCode'=>$thisMember['number']))}" style="position:absolute;top:65%;left:50%;transform:translate(-50%,-50%);">
+            </div>
+        </div>
+    </div>
+    <div>
+        <ul class="box group_btn">
+            <!--<li><a href="{jlzcms::U('Card/topay', array('token' => $token,'wecha_id'=>$wecha_id,'cardid'=>$card['id']))}">充值</a></li>
+            <neq name="token" value="pvogfi1480683100">
+                <li><a href="{jlzcms::U('Card/consume', array('token' => $token,'wecha_id'=>$wecha_id,'cardid'=>$card['id']))}">付款</a></li>
+            </neq>-->
+            <li><a href="javascript:alert('暂不支持')">充值</a></li>
+            <li><a href="javascript:alert('暂不支持')">付款</a></li>
+        </ul>
+    </div>
+
+    </header>
+    <div class="body">
+        <ul class="list_ul">
+            <div>
+                <if condition="$previlege neq ''">
+                    <volist name="previlege" id="previlege">
+                        <li class="li_a">
+                            <label class="label" onClick="this.parentNode.classList.toggle('on');"><i>&nbsp;</i>{jlzcms:$previlege.title}<span>&nbsp;</span></label>
+                            <ol>
+                                <h6>详细说明：</h6>
+                                <p>
+                                    {jlzcms:$previlege.info}
+                                </p>
+                            </ol>
+                        </li>
+                    </volist>
+                </if>
+
+                <neq name="token" value="tqhskz1488536016">
+                    <li class="li_b">
+                        <a href="{jlzcms::U('Card/my_coupon', array('token' => $token,'wecha_id'=>$wecha_id,'cardid'=>$card['id']))}">
+                            <label class="label">
+                                <i>&nbsp;</i>
+                                会员优惠
+                                <span>&nbsp;</span>
+                            </label>
+                        </a>
+                    </li>
+                </neq>
+                <li class="li_e">
+                    <a href="{jlzcms::U('Card/notice',array('token'=>$token,'wecha_id'=>$wecha_id,'cardid'=>$thisCard['id']))}">
+                        <label class="label">
+                            <i>&nbsp;</i>
+                            消息通知
+                            <span>&nbsp;</span>
+                        </label>
+                    </a>
+                </li>
+                <li class="li_d">
+                    <a href="{jlzcms::U('Userinfo/index',array('token'=>$_GET['token'],'cardid'=>(int)$_GET['cardid'],'wecha_id'=>$_GET['wecha_id'],'redirect'=>'Card/card|cardid:'.(int)$_GET['cardid']))}">
+                        <label class="label">
+                            <i>&nbsp;</i>
+                            完善会员卡资料 
+                            <span>&nbsp;</span>
+                        </label>
+                    </a>
+                </li>
+            </div>
+            <div>
+                <li class="li_v">
+                    <a href="{jlzcms::U('Card/cardIntro',array('token'=>$token,'wecha_id'=>$wecha_id,'cardid'=>$card['id']))}">
+                        <label class="label"><i>&nbsp;</i>
+                            <p class="mutipleLine">
+                                会员卡介绍
+                            </p>
+                            <span>&nbsp;</span>
+                        </label>
+                    </a>
+                </li>
+                <!-- 门店-->
+                <li class="li_k">
+                    <a href="javascript:alert('暂不支持')">
+                        <label class="label">
+                            <i>&nbsp;</i>
+                            商家门店
+                            <span>&nbsp;</span>
+                        </label>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $('.explain,.front').click(function(){
+        $('.code').show();
+        $('.mask').show();
+    });
+    $('.mask,.code').click(function(){
+        $('.code').hide();
+        $('.mask').hide();
+    });
+</script>
+</body>
+</html>

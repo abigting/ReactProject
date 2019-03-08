@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>暖心小屋申请</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="./tpl/static/unicon/date/css/union_jiayuan.css" rel="stylesheet" />
+    <!-- 引入样式和js文件 -->
+    <script src="./tpl/static/unicon/date/js/mobileSelect.min.js"></script>
+    <link href="./tpl/static/unicon/date/css/mobileSelect.css" rel="stylesheet" />
+    <style>
+        /**{margin:0;padding:0}*/
+        body{
+            margin:0 auto;
+            background-color: #eee;
+            font-size: 16px;
+            font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
+        }
+        #region{
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body style="background-color: #eeeeee" >
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="http://wx91go.oss-cn-hangzhou.aliyuncs.com/sxzgh/momHouse/warmth.jpg" class="borderStyle"></div>
+    </div>
+</div>
+<!--表单部分-->
+<div class="container">
+    <form class="form-horizontal row ">
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">
+                单位名称
+            </label>
+            <div class="col-xs-8 row">
+                <input type="text" id="company_name" class="form-control " name="company_name" placeholder="请输入单位名称">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <div class="col-xs-6 control-label " >请选择所属区域</div>
+            <div class="col-xs-5 row" id="region">
+                <input type="text" class="form-control moremes" name="region" unselectable="on" onfocus="this.blur()"
+                       readonly>
+            </div>
+            <div class="col-xs-1"><i class="icon iconfont ">&#xe601;</i></div>
+        </div>
+        <div class="form-group col-xs-12 row ">
+            <label class="col-xs-4 control-label">职工人数</label>
+            <div class="col-xs-8 row">
+                <input type="number" id="employee_number" class="form-control " name="employee_number" placeholder="请输入职工人数">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">女工人数</label>
+            <div class="col-xs-8 row">
+                <input type="number" id="female_number" class="form-control " name="female_number" placeholder="请输入女工人数">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">育龄女工人数</label>
+            <div class="col-xs-7 row">
+                <input type="number" id="childbearing_age_female_number" class="form-control " name="childbearing_age_female_number" placeholder="请输入育龄女工人数">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">详细地址</label>
+            <div class="col-xs-7 row">
+                <textarea class="form-control" id="address" name="address" placeholder="请输入详细地址" cols="27" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-5 control-label">小屋具体位置</label>
+            <div class="col-xs-7 row">
+                <textarea class="form-control" id="house_location" name="house_location" placeholder="请输入小屋具体位置" cols="27" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">小屋负责人</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="house_manager" class="form-control " name="house_manager" placeholder="请输入小屋负责人">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">联系电话</label>
+            <div class="col-xs-8 row">
+                <input type="tel" id="tel" class="form-control " name="tel" placeholder="请输入联系电话">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">面积</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="area" class="form-control " name="area" placeholder="请输入面积">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-4 control-label">开放时间</label>
+            <div class="col-xs-8 row">
+                <input type="text" id="open_time" class="form-control " name="open_time" placeholder="请输入开放时间">
+            </div>
+        </div>
+        <div class="form-group col-xs-12 row">
+            <label class="col-xs-6 control-label">每天平均使用人次</label>
+            <div class="col-xs-6 row">
+                <input type="number" id="use_rate" class="form-control " name="use_rate" placeholder="每天平均使用人次">
+            </div>
+        </div>
+    </form>
+</div>
+<!--<div id="remarks">注：打“*”号为必填项</div>-->
+<div class="text-center">
+    <button type="submit" class="btn " id="submit">提交</button>
+</div>
+<div style="text-align:center">
+    <a href="http://mp.weixin.qq.com/s/FGqlngcBcy-CLGbEZha1GA" style="text-decoration:none;color:#b6b6b6;font-size:14px;">由绍兴锦蓝钻&trade;提供技术支持</a>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+<!-- Commonshare -->
+<include file="Common:share" />
+<!--表单验证-->
+<script>
+    // 弹窗
+    function toast(a) {
+        if (a == '' || a == undefined)
+            return;
+        if ($('.toast').length <= 0) {
+            var d = "<div class='toast'></div>";
+            $('body').append(d)
+        }
+        var t = null;
+        $('.toast').text(a);
+        var w = $('.toast').width();
+
+        $('.toast').css('max-width', '100vw');
+        clearTimeout(t);
+        $('.toast').fadeIn(800);
+        t = setTimeout(function () {
+            $('.toast').fadeOut(2000)
+        }, 2000)
+    }
+    $(function(){
+        var region = {jlzcms:$region};
+        var regionSelect = new MobileSelect({
+            trigger: '#region',
+            title: '选择所属区域',
+            wheels: [
+                {data: region}
+            ],
+            position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+            transitionEnd:function(indexArr, data){
+            },
+            callback:function(indexArr, data){
+                console.log(data);
+            }
+        });
+        $('#submit').click(function(){
+            var company_name = $.trim($('#company_name').val());
+            var region   = $.trim($('#region').text());
+            var employee_number = $.trim($('#employee_number').val());
+            var female_number = $.trim($('#female_number').val());
+            var childbearing_age_female_number = $.trim($('#childbearing_age_female_number').val());
+            var address= $.trim($('#address').val());
+            var house_location = $.trim($('#house_location').val());
+            var house_manager = $.trim($('#house_manager').val());
+            var tel = $.trim($('#tel').val());
+            var area= $.trim($('#area').val());
+            var open_time = $.trim($('#open_time').val());
+            var use_rate = $.trim($('#use_rate').val());
+            var reg     =  /^1(3|4|5|6|7|8|9)\d{9}$/ ;
+            if(company_name === ''){
+                toast('请填写工作单位');
+                $('#company_name').focus();
+                return;
+            }
+            if(region === ''){
+                toast('请选择所属区域');
+                return;
+            }
+            if(employee_number === ''){
+                toast('请填写职工人数');
+                $('#employee_number').focus();
+                return;
+            }
+            if(female_number === ''){
+                toast('请填写女工人数');
+                $('#female_number').focus();
+                return;
+            }
+            if(childbearing_age_female_number === ''){
+                toast('请填写育龄女工人数');
+                $('#childbearing_age_female_number').focus();
+                return;
+            }
+            if(address === ''){
+                toast('请填写小屋详细地址');
+                $('#address').focus();
+                return;
+            }
+            if(house_location === ''){
+                toast('请填写小屋具体位置');
+                $('#house_location').focus();
+                return;
+            }
+            if(house_manager === ''){
+                toast('请填写小屋负责人');
+                $('#house_manager').focus();
+                return;
+            }
+            if(tel === ''){
+                toast('请填写您的手机号！');
+                $('#tel').focus();
+                return;
+            } else {
+                if(!reg.test(tel)){
+                    toast('手机号码格式不正确！');
+                    $('#tel').focus();
+                    return;
+                }
+            }
+            if(area === ''){
+                toast('请填写小屋面积');
+                $('#area').focus();
+                return;
+            }
+            if(open_time === ''){
+                toast('请填写开放时间');
+                $('#open_time').focus();
+                return;
+            }
+            if(use_rate === ''){
+                toast('请填写每天平均使用人次');
+                $('#use_rate').focus();
+                return;
+            }
+//            if(female_number == 0){
+//                toast('人数不能为0！');
+//                $('#female_number').focus();
+//                return;
+//            }
+//            if(employee_number==0){
+//                toast('人数不能为0！');
+//                $('#employee_number').focus();
+//                return;
+//            }
+//            if(childbearing_age_female_number==0){
+//                toast('人数不能为0！');
+//                $('#childbearing_age_female_number').focus();
+//                return;
+//            }
+           var use_rate=parseInt(use_rate);
+           var female_number=parseInt(female_number);
+           var employee_number=parseInt(employee_number);
+           var childbearing_age_female_number=parseInt(childbearing_age_female_number);
+            if(use_rate<=0){
+                toast('使用人次必须大于0！');
+                $('#use_rate').focus();
+                return;
+            }
+            if(childbearing_age_female_number<=0){
+                toast('人数必须大于0');
+                $('#childbearing_age_female_number').focus();
+                return;
+            }
+            if(employee_number<female_number){
+                toast('职工人数不能少于女工人数');
+                $('#employee_number').focus();
+                return;
+            }
+            if(female_number<childbearing_age_female_number){
+                toast('女工人数不能少于育龄女工人数');
+                $('#female_number').focus();
+                return;
+            }
+            $("#submit").attr('disabled','true');
+            $.ajax({
+                type: "POST",
+                url: "{jlzcms::U('Union/applyWarmHouse',array('token'=>$token,'wecha_id'=>$wecha_id))}",
+                data: {
+                    'company_name':company_name,
+                    'region':region,
+                    'employee_number':employee_number,
+                    'female_number':female_number,
+                    'childbearing_age_female_number':childbearing_age_female_number,
+                    'address':address,
+                    'house_location':house_location,
+                    'house_manager':house_manager,
+                    'tel':tel,
+                    'area':area,
+                    'open_time':open_time,
+                    'use_rate':use_rate
+                },
+                dataType: "json",
+                success: function(data) {
+                    toast(data.msg);
+                    if(data.status == 1){
+                        setTimeout(function () {
+                            window.location.href = "{jlzcms::U('Union/warmHouseList',array('token'=>$token,'wecha_id'=>$wecha_id))}";
+                        }, 2000);
+                    }
+                    else { $("#submit").removeAttr('disabled');}
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <if condition="$token eq 'byplnl1500279533'">
+        <title>积分</title>
+        <else />
+        <title>工会积分</title>
+    </if>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./tpl/Wap/default/common/cultureK/css/common.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .top{
+            background-color: #35c3a9;
+            background-position: 20px center;
+            background-repeat: no-repeat;
+            background-size: 30% auto;
+        }
+        .recharge{
+            height: 40px;
+            line-height: 40px;
+            padding-right: 0;
+            margin-top: 10px;
+        }
+        .recharge a{
+            display: block;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 40px;
+            background-color: rgba(0,0,0,.12);
+            background-image: url(http://jlzpublicbucket.oss-cn-hangzhou.aliyuncs.com/coffee-culture/recharge0-icon.png);
+            background-position: 10px center;
+            background-repeat: no-repeat;
+            background-size: 22px auto;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            float: right;
+            color: #ffffff;
+            font-size: 16px;
+        }
+        .integral{
+            height: 45px;
+            line-height: 45px;
+            margin-bottom: 10px;
+        }
+        .integral h3{
+            height: 45px;
+            line-height: 45px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 550;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .integral h3 span{
+            font-size: 50px;
+            font-weight: 550;
+            margin-right: 8px;
+        }
+        .jinyan{
+            height: 45px;
+            line-height: 45px;
+            position: relative;
+            margin-bottom:10px
+        }
+        .chenghao{ color: #ffffff; margin-right: 8px; font-size:14px}
+        .total_exp{
+            position: relative;
+            display: inline-block;
+            width: 80%;
+            height: 13px;
+            background-color: #ffffff;
+            border-radius: 7px;
+            box-shadow: 1px 2px 2px 2px rgba(0,0,0,.15);
+        }
+        .current_exp{
+            position: absolute;
+            width: 0%;
+            height: 13px;
+            background-color: #bbdb85;
+            border-radius: 7px;
+            transition: width 1.2s ease-in-out;
+        }
+        .number{
+            display: none;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            color: #777777;
+            margin-bottom: 0;
+            z-index: 1000;
+
+        }
+        .number .current{
+
+        }
+        .th{
+            line-height: 45px;
+            border-bottom: 1px solid #f5f7f9;
+        }
+        .th div{
+            text-align: center;
+            color: #35C3A9;
+            font-weight: 550;
+        }
+        .td{
+            line-height: 50px;
+            border-bottom: 1px solid #f5f7f9;
+        }
+        .td div{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+
+    <div class="row top">
+        <!--总工会去掉充值-->
+        <!--<div class="col-xs-12 recharge">-->
+            <!--<if condition="$token neq 'byplnl1500279533'">-->
+                <!--<a href="{jlzcms::U('CultureK/recharge',array('token' => $_GET['token']))}">充值</a>-->
+            <!--</if>-->
+        <!--</div>-->
+        <div class="col-xs-12 integral">
+            <h3><span>{jlzcms:$score}</span>当前积分</h3>
+        </div>
+        <!--<div class="col-xs-12 jinyan">
+            &lt;!&ndash;智慧后勤去掉进度条&ndash;&gt;
+            <if condition="$token eq 'byplnl1500279533'">
+                <else />
+                <span class="chenghao">{jlzcms:$chenghao}</span>
+                <div class="total_exp" value="{jlzcms:$schedule}">
+                    <p class="number"><span class="current">{jlzcms:$max_score}</span>&nbsp;/&nbsp;{jlzcms:$schedule}</p>
+                    <div class="current_exp" value="{jlzcms:$max_score}"></div>
+                </div>
+            </if>
+
+        </div>-->
+    </div>
+
+    <div class="row th">
+        <div class="col-xs-4">日期</div>
+        <div class="col-xs-4">名称</div>
+        <div class="col-xs-4">状态</div>
+    </div>
+
+    <volist name="integral" id="vo">
+        <div class="row td">
+            <div class="col-xs-4">{jlzcms:$vo['createtime']|date="Y/m/d",###}</div>
+            <div class="col-xs-4">{jlzcms:$vo['remark']}</div>
+            <div class="col-xs-4">{jlzcms:$vo['integral']}</div>
+        </div>
+    </volist>
+
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!--<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+<script>
+    $(function(){
+        var total_exp = $(".total_exp").attr('value');
+        var current_exp = $(".current_exp").attr('value');
+        var _width = $(".number").width()/2;
+
+
+        if(total_exp == ''){
+            total_exp = current_exp;
+            $(".number").html("<span class='current'>"+ current_exp +"</span>")
+        }
+
+        var scale = (current_exp/total_exp)*100;
+
+        $(".current_exp").css('width',scale+'%');
+        $(".number").css({'margin-left':'-'+_width +'px','display':'block'});
+    })
+</script>
+<!-- Commonshare -->
+<include file="Common:share" />
+</body>
+</html>
