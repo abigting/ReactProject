@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import styles from './Steps.less';
-import { Row, Col  } from 'antd';
+import styles from './formExample.less';
+import {Row, Col} from 'antd';
 
 
-export default class Steps extends Component{
+export default class FormExample extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      list:[0,1,2,3,4,5,6]
+    this.state = {
+      list: [0, 1, 2, 3, 4, 5]
     }
   }
-  render(){
-    return(
+
+  render() {
+    return (
       <div>
         <Row>
           <Col span={24}>
@@ -26,7 +27,7 @@ export default class Steps extends Component{
               <div className={styles.formBody}>
                 <ul>
                   {
-                    this.state.list.map(s=>
+                    this.state.list.map(s =>
                       <li key={s}></li>
                     )
                   }

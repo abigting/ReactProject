@@ -1337,7 +1337,7 @@ this.tinycolor = tinycolor;
     var saturation;
     if (isLight) {
       saturation = Math.round(hsv.s * 100) - saturationStep * i;
-    } else if (i == darkColorCount) {
+    } else if (i === darkColorCount) {
       saturation = Math.round(hsv.s * 100) + saturationStep;
     } else {
       saturation = Math.round(hsv.s * 100) + saturationStep2 * i;
@@ -2149,7 +2149,8 @@ this.tinycolor = tinycolor;
 // 
 // @bg-color: #dddddd;
 :root {
-    --PC: @primary-color;
+  --PC: @primary-color;
+  --footer: @layout-header-background;
  }
 
 
@@ -3768,7 +3769,7 @@ html {
 }
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
 .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
-  background: #f5f5f5;
+  background-color: #fafafa;
 }
 .ant-cascader-menu-item-expand .ant-cascader-menu-item-expand-icon,
 .ant-cascader-menu-item-expand .ant-cascader-menu-item-loading-icon {
@@ -6029,8 +6030,8 @@ form .ant-upload {
   border-color: transparent;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item {
-  border-color: #d9d9d9;
   background: #f5f5f5;
+  border-color: #d9d9d9;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item a {
   color: rgba(0, 0, 0, 0.25);
@@ -6038,8 +6039,8 @@ form .ant-upload {
   border: none;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-active {
-  border-color: transparent;
   background: #dbdbdb;
+  border-color: transparent;
 }
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-active a {
   color: #fff;
@@ -6047,9 +6048,9 @@ form .ant-upload {
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-link,
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-link:hover,
 .ant-pagination.ant-pagination-disabled .ant-pagination-item-link:focus {
-  border-color: #d9d9d9;
   color: @text-color-secondary;
   background: #f5f5f5;
+  border-color: #d9d9d9;
 }
 .ant-popover {
   color: @text-color;

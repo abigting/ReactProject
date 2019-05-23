@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Layout, Menu} from 'antd';
+import { Layout, Menu, Avatar} from 'antd';
 import styles from './header.less';
 
 const { Header } = Layout;
@@ -26,6 +26,11 @@ export default class HeaderLayout extends Component{
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
           <Menu.Item key="3">nav 3</Menu.Item>
+          <Menu.Item key="4">
+            <Avatar size="large" className={styles.name}>
+              F
+            </Avatar>
+          </Menu.Item>
         </Menu>
       </Header>
     )
