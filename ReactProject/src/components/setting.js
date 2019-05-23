@@ -1,5 +1,5 @@
 import React from 'react';
-import { message, Icon, Drawer, Divider} from 'antd';
+import { message, Icon, Drawer, Divider, Button} from 'antd';
 import 'rc-drawer/assets/index.css';
 import BlockColor from "./BlockColor";
 import styles from './setting.less';
@@ -21,11 +21,22 @@ function Setting({collapse, dispatch, currentColor}) {
             message.error(`切换失败`);
           });
         break;
-      case 'formColor':
+      case 'headColor':
+        window.less.modifyVars(
+          {
+            '@heading-color': val,
+          }
+        ).then(() => {
+          message.success('切换成功')
+        })
+          .catch(error => {
+            message.error(`切换失败`);
+          });
+        break;
+      case 'primaryColor':
         window.less.modifyVars(
           {
             '@primary-color': val,
-            '@link-color': val,
             '@btn-primary-bg': val,
           }
         ).then(() => {
@@ -38,6 +49,24 @@ function Setting({collapse, dispatch, currentColor}) {
       case 'theme0':
         window.less.modifyVars(
           {
+            '@heading-color': '#fa541c',
+            '@primary-color': '#fa541c',
+            '@btn-primary-bg': '#fa541c',
+            '@secondary-color': '#fa541c',
+            '@thirdly-color': '#ff7a45',
+            '@fourthly-color': '#ffc069',
+            'layout-header-background': '#ffbb96',
+          }
+        ).then(() => {
+          message.success('切换成功')
+        })
+          .catch(error => {
+            message.error(`切换失败`);
+          });
+        break;
+      case 'theme1':
+        window.less.modifyVars(
+          {
             '@primary-color': '#364768',
             '@btn-primary-bg': '#364768',
             '@layout-header-background': '#314659',
@@ -47,20 +76,6 @@ function Setting({collapse, dispatch, currentColor}) {
         })
           .catch(error => {
             message.error(`Failed to update theme`);
-          });
-        break;
-      case 'theme1':
-        window.less.modifyVars(
-          {
-            '@primary-color': 'rgb(47, 194, 91)',
-            '@btn-primary-bg': 'rgb(19, 194, 194)',
-            '@layout-header-background': 'rgb(19, 194, 194)',
-          }
-        ).then(() => {
-          message.success('切换成功')
-        })
-          .catch(error => {
-            message.error(`切换失败`);
           });
         break;
       default:
@@ -79,6 +94,17 @@ function Setting({collapse, dispatch, currentColor}) {
     dispatch({type: "layout/update", payload: {collapse: !collapse}});
   };
 
+  // 重置颜色
+  function resetTheme(){
+    let initialValue= {
+      '@primary-color': '#1890ff'
+    };
+    window.less
+      .modifyVars(initialValue)
+      .catch(error => {
+        message.error(`重置失败`);
+      });
+  }
   return (
     <Drawer
       mask={false}
@@ -105,55 +131,21 @@ function Setting({collapse, dispatch, currentColor}) {
         <Divider>选择颜色</Divider>
         <BlockColor
           value={currentColor}
-          list={[
-            {
-              key: '#f5222d',
-              title: '薄暮',
-            },
-            {
-              key: '#fa541c',
-              title: '火山',
-            },
-            {
-              key: '#faad14',
-              title: '日暮',
-            },
-            {
-              key: '#13c2c2',
-              title: '明青',
-            },
-            {
-              key: '#52c412',
-              title: '极光青',
-            },
-            {
-              key: '#1890ff',
-              title: '拂晓蓝（默认）',
-            },
-            {
-              key: '#2f54eb',
-              title: '极客蓝',
-            },
-            {
-              key: '#722ed1',
-              title: '酱紫',
-            },
-            {
-              key: '#364768',
-              title: '浅紫',
-            }
-          ]}
           onChange={e=>colorChange(e)}
         />
       </div>
       <div className={styles.changeColor}>
-        <p onClick={()=>themeChange(currentColor, 'layoutBgColor')}>设置顶部导航栏背景色</p>
-        <p onClick={()=>themeChange(currentColor, 'formColor')}>设置Active颜色</p>
+        <p onClick={()=>themeChange(currentColor, 'primaryColor')}>设置@primary-color</p>
+        <p onClick={()=>themeChange(currentColor, 'layoutBgColor')}>设置@layout-header-background</p>
+        <p onClick={()=>themeChange(currentColor, 'headColor')}>设置@heading-color</p>
       </div>
       <div className={styles.changeTheme}>
         <Divider>切换主题</Divider>
         <p onClick={()=>themeChange(currentColor, 'theme0')}>主题一</p>
         <p onClick={()=>themeChange(currentColor, 'theme1')}>主题二</p>
+      </div>
+      <div style ={{textAlign:'center'}}>
+        <Button type='primary' onClick={()=> resetTheme()}>重置主题色</Button>
       </div>
     </Drawer>
   )

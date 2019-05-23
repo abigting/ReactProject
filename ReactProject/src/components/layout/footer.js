@@ -6,11 +6,11 @@ const { Footer} = Layout;
 
 
 export default class FooterLayout extends Component{
-  constructor(props) {
-    super(props);
-    // this.state={
+  // constructor(props) {
+  //   super(props);
+  //   this.state={
+  //   }
   // }
-  }
   render(){
     return(
       <Footer className={styles.footer} >Created by Fiona</Footer>

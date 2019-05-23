@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-
-import {Button, message} from 'antd'
-
-import {BlockColor} from '../components'
-
+import {Button, message} from 'antd';
+import {BlockColor} from '../components';
 
 export default class AppContainer extends Component {
   constructor(props) {
@@ -12,7 +9,6 @@ export default class AppContainer extends Component {
   }
 
   colorChange(val) {
-    console.log(val, 'val');
     window.less.modifyVars(
       {
         '@primary-color': val,

@@ -15,7 +15,10 @@ const options = {
     '@heading-color',
     '@layout-body-background',
     '@btn-primary-bg',
-    '@layout-header-background'
+    '@layout-header-background',
+    '@secondary-color',
+    '@thirdly-color',
+    '@fourthly-color',
   ],
   // indexFileName: 'index.html',
   outputFilePath: path.join(__dirname, './src/static/color.less'),

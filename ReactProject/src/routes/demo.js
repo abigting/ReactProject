@@ -4,9 +4,7 @@ import {Layout, FormExample} from '../components';
 export default class Demo extends Component {
   // constructor(props) {
   //   super(props);
-  //   this.state({
-  //
-  //   })
+  //   this.state = {}
   // }
 
   render() {

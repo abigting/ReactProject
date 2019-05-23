@@ -69,7 +69,6 @@ const BlockChecbox = ({ colors, title, value, onChange }) => {
       },
     ];
   }
-  console.log(value, colorList, 'colorList')
   return (
     <div className={styles.themeColor}>
       <h3 className={styles.title}>{title}</h3>

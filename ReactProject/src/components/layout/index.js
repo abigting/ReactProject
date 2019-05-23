@@ -1,10 +1,14 @@
 import React from 'react';
 import HeaderLayout from './header';
 import FooterLayout from './footer';
-import {Layout} from 'antd';
+import {Layout, message} from 'antd';
 import 'rc-drawer/assets/index.css';
 import {connect} from 'dva';
 import Setting from '../setting';
+
+message.config({
+  maxCount: 1,
+});
 
 const { Content} = Layout;
 
