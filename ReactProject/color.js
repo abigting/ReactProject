@@ -21,7 +21,7 @@ const options = {
     '@fourthly-color',
   ],
   // indexFileName: 'index.html',
-  outputFilePath: path.join(__dirname, './src/static/color.less'),
+  outputFilePath: path.join(__dirname, './public/color.less'),
 }
 
 generateTheme(options).then(less => {
