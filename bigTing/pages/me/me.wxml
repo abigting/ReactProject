@@ -1,2 +1,17 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<view>
+<view>
+ <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{userInfo.nickName}}</view>
+                    </view>
+</view>
+<view class="weui-footer">
+<view class="weui-footer__links">
+    <navigator url="" class="weui-footer__link">Created by 大婷</navigator>
+</view>
+<view class="weui-footer__text">Copyright © 喵呜</view>
+</view>
+</view>

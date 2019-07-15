@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FionaFeng</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        .el-row {
+            text-align: center;
+            margin-bottom: 20px;
+
+        &
+        :last-child {
+            margin-bottom: 0;
+        }
+
+        }
+        .bg-purple {
+            color: #ffffff;
+            background: #d3dce6;
+        }
+
+        .bg-purple-light {
+            color: #333333;
+            background: #e5e9f2;
+        }
+
+        .grid-content {
+            min-height: 36px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div @click="addData">
+        添加
+    </div>
+    <input type="text"  @input="search">
+    <ul>
+        <el-row v-for="(list, index) in tableData">
+            <el-col :span="6">
+                <p v-if="list.editable">
+                    <input type="text"  v-model="list.date" @input="changeData(list.id)">
+                </p>
+                <div class="grid-content bg-purple" v-if="!list.editable">
+                        {{ list.date }}
+                </div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                    {{ list.name }}
+                </div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple">
+                    {{ list.address }}
+                </div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                    <span @click="deleteItem(list.id)">
+                        删除
+                    </span>|
+                    <span @click="editItem(list.id)">
+                        编辑
+                    </span>
+                </div>
+            </el-col>
+        </el-row>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            tableData: [{
+                id:0,
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+                id:1,
+                date: '2016-05-04',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1517 弄'
+            }, {
+                id:2,
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+            }, {
+                id:3,
+                date: '2016-05-03',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1516 弄'
+            }]
+        },
+        methods: {
+            deleteItem:function(id){
+                list=this.tableData.filter(s=>
+                    s.id!==id
+                );
+                this.tableData=list;
+            },
+            editItem:function(id){
+                list=this.tableData.map(s=>
+                s.id===id? s= {...s, editable:!s.editable}:s);
+                this.tableData=list;
+            },
+            changeData:function(e, id){
+                list=this.tableData.map(s=>
+                    s.id===id? s= {...s, date:e.target.value}:s);
+                this.tableData=list;
+            },
+            addData:function(){
+                list=[...this.tableData, {id:this.tableData.length, editable:true}];
+                this.tableData=list;
+            },
+            search:function(e){
+                list=this.tableData.filter(s=>
+                    s.name===e.target.value);
+                console.log(list,e.target.value,'e.data')
+                this.tableData=list;
+            }
+        }
+    })
+</script>
+</body>

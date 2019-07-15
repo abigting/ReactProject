@@ -15,6 +15,11 @@ Page({
       url: '../logs/logs'
     })
   },
+  clickMe: function(){
+    this.setData({
+      motto:'嗨，大婷'
+    })
+  },
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({

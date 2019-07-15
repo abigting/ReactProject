@@ -1,47 +1,48 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/logs/logs",
     "pages/work/work",
     "pages/me/me"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "大婷的小程序",
-    "navigationBarTextStyle":"black"
+    "navigationBarTitleText": "喵呜",
+    "navigationBarTextStyle": "black"
   },
-    "tabBar": {
-      "color": "#dbdbdb",
-      "selectedColor": "#CC4140",
-      "backgroundColor": "#FFF",
-      "borderStyle": "white",
-      "list": [
-        {
-          "iconPath": "images/Home.png",
-          "selectedIconPath": "images/HomeActive.png",
-          "pagePath": "pages/index/index",
-          "text": "Home"
-        },
-        {
-          "iconPath": "images/Ranking.png",
-          "selectedIconPath": "images/RankingActive.png",
-          "pagePath": "pages/logs/logs",
-          "text": "Ranking"
-        },
-        {
-          "iconPath": "images/WorkItem.png",
-          "selectedIconPath": "images/WorkItemActive.png",
-          "pagePath": "pages/work/work",
-          "text": "WorkItem"
-        },
-        {
-          "iconPath": "images/Me.png",
-          "selectedIconPath": "images/MeActive.png",
-          "pagePath": "pages/me/me",
-          "text": "Me"
-        }
-      ]
-    },
-    "debug": true
+  "tabBar": {
+    "color": "#dbdbdb",
+    "selectedColor": "#CC4140",
+    "backgroundColor": "#FFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "iconPath": "images/Home.png",
+        "selectedIconPath": "images/HomeActive.png",
+        "pagePath": "pages/index/index",
+        "text": "Home"
+      },
+      {
+        "iconPath": "images/Ranking.png",
+        "selectedIconPath": "images/RankingActive.png",
+        "pagePath": "pages/logs/logs",
+        "text": "Ranking"
+      },
+      {
+        "iconPath": "images/WorkItem.png",
+        "selectedIconPath": "images/WorkItemActive.png",
+        "pagePath": "pages/work/work",
+        "text": "WorkItem"
+      },
+      {
+        "iconPath": "images/Me.png",
+        "selectedIconPath": "images/MeActive.png",
+        "pagePath": "pages/me/me",
+        "text": "Me"
+      }
+    ]
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
 }
